@@ -2,12 +2,12 @@
 " Vim syntax file
 " Language: cisco configuration files
 " Version: .625
-" 
+"
 " Inception: 29-jan-2006
 " Inspiration:  Harry Schroeder's original cisco vim syntax file, and a discussion
 "               on reddit.com in the vim subreddit on highlighting ip addresses in
 "               a syntax file in 2005.  Grown from there.
-" Notes:    
+" Notes:
 "           This does not follow the conventional notion in vim of separate
 "           language and color definition files.  That's because cisco
 "           configuration syntax, in spite of the misnomer 'code' used when
@@ -35,13 +35,13 @@
 "           workable list of configuration syntax elements consistent and
 "           common across all cisco gear and configurations may come into
 "           existance.  At that point it will make sense to split this file
-"           out into color theme and syntax definition files. For now this
-"           decidely un-vimlike approach makes the project much more
-"           maintainable.
+"           out into color theme and syntax definition files.
 "
-"           While there are a large collection of keywords as in Schroeder's work, 
-"           a smaller set was chosen and highlighting changed so later keywords 
+"
+"           While there are a large collection of keywords as in Schroeder's work,
+"           a smaller set was chosen and highlighting changed so later keywords
 "           in a config line would receive different highlighting.
+"
 "
 "           The most significant change was added when the Conqueterm plugin
 "           became available, and a terminal session could be opened in a vim
@@ -53,7 +53,7 @@
 "
 "           Used with ConqueTerm running bash there is an undesireable side
 "           effect when connecting to cisco nexus equipment, when a backspace
-"           will 'blank' a line.  
+"           will 'blank' a line.
 "           To get around this:
 "           :ConqueTerm screen -c ~/.screenrcnull
 "
@@ -61,7 +61,7 @@
 "           vbell off
 "
 "           screen apparently cleans out what I think are superfluous CR or
-"           LF characters NXoS puts out that Conqueterm doesn't cope with.
+"           LF characters the Conqueterm doesn't like.
 "
 "           The foreground colors will as such look the same in any color
 "           scheme, so this will look good on some schemes like solarized, and
@@ -92,6 +92,7 @@
 "           .625
 "               fixes some of the error highlighting for the output of
 "               'show interface'
+"
 "
 "
 " }}}
@@ -206,7 +207,7 @@ else " assume terminal mode
             let s:white         =   "255"
             let s:gray          =   "246"
             let s:black         =   "236"
-            let s:param         =   "7"  
+            let s:param         =   "7"
             let s:red           =   "196"
             let s:orange        =   "208"
             let s:brown         =   "136"
@@ -248,7 +249,7 @@ else " assume terminal mode
             let s:white         =   "15"
             let s:gray          =   "8"
             let s:black         =   "0"
-            let s:param         =   "15"  
+            let s:param         =   "15"
             let s:red           =   "9"
             let s:orange        =   "9 term=bold"
             let s:brown         =   "1 term=bold"
@@ -384,39 +385,40 @@ syn match parameter5 /[^ ]\+/ contained
 exe s:h . "parameter5" . s:parameter5
 " }}}
 " show interface error conditions {{{
-syn match int_errors /[1-9][0-9]* collision[s]\{0,1}/ 
-syn match int_errors /[1-9][0-9]* runts/ 
-syn match int_errors /[1-9][0-9]* giants/ 
-syn match int_errors /[1-9][0-9]* throttles/ 
-syn match int_errors /[1-9][0-9]* input errors/ 
-syn match int_errors /[1-9][0-9]* CRC/ 
-syn match int_errors /[1-9][0-9]* frame/ 
-syn match int_errors /[1-9][0-9]* overrun/ 
-syn match int_errors /[1-9][0-9]* ignored/ 
-syn match int_errors /[1-9][0-9]* watchdog/ 
-syn match int_errors /[1-9][0-9]* input packets with dribble condition detected/ 
-syn match int_errors /[1-9][0-9]* input discard/ 
-syn match int_errors /[1-9][0-9]* output discard/ 
-syn match int_errors /[1-9][0-9]* output error[s]\{0,1}/ 
-syn match int_errors /[1-9][0-9]* unknown protocol drops/ 
-syn match int_errors /[1-9][0-9]* babble[s]\{0,1}/ 
-syn match int_errors /[1-9][0-9]* late collision/ 
-syn match int_errors /[1-9][0-9]* deferred/ 
-syn match int_errors /[1-9][0-9]* lost carrier/ 
-syn match int_errors /[1-9][0-9]* no carrier/ 
-syn match int_errors /[1-9][0-9]* no buffer/ 
-syn match int_errors /[1-9][0-9]* input errors*/ 
-syn match int_errors /[1-9][0-9]* short frame/ 
-syn match int_errors /[1-9][0-9]* bad etype drop/ 
-syn match int_errors /[1-9][0-9]* bad proto drop/ 
-syn match int_errors /[1-9][0-9]* if down drop/ 
-syn match int_errors /[1-9][0-9]* input with dribble/ 
-syn match int_errors /[1-9][0-9]* output buffer failures/ 
-syn match int_errors /[1-9][0-9]* underrun/ 
-syn match int_errors /[1-9][0-9]* ignored/ 
-syn match int_errors /[1-9][0-9]* storm suppression/ 
-syn match int_errors /[1-9][0-9]* abort/ 
-syn match int_errors /[eE]rr[Dd]isable[d ]/ 
+syn match int_errors /[1-9][0-9]* collision[s]\{0,1}/
+syn match int_errors /[1-9][0-9]* runts/
+syn match int_errors /[1-9][0-9]* giants/
+syn match int_errors /[1-9][0-9]* throttles/
+syn match int_errors /[1-9][0-9]* input errors/
+syn match int_errors /[1-9][0-9]* CRC/
+syn match int_errors /[1-9][0-9]* frame/
+syn match int_errors /[1-9][0-9]* overrun/
+syn match int_errors /[1-9][0-9]* ignored/
+syn match int_errors /[1-9][0-9]* watchdog/
+syn match int_errors /[1-9][0-9]* input packets with dribble condition detected/
+syn match int_errors /[1-9][0-9]* input discard/
+syn match int_errors /[1-9][0-9]* output discard/
+syn match int_errors /[1-9][0-9]* output error[s]\{0,1}/
+syn match int_errors /[1-9][0-9]* unknown protocol drops/
+syn match int_errors /[1-9][0-9]* babble[s]\{0,1}/
+syn match int_errors /[1-9][0-9]* late collision/
+syn match int_errors /[1-9][0-9]* deferred/
+syn match int_errors /[1-9][0-9]* lost carrier/
+syn match int_errors /[1-9][0-9]* no carrier/
+syn match int_errors /[1-9][0-9]* no buffer/
+syn match int_errors /[1-9][0-9]* input errors*/
+syn match int_errors /[1-9][0-9]* short frame/
+syn match int_errors /[1-9][0-9]* bad etype drop/
+syn match int_errors /[1-9][0-9]* bad proto drop/
+syn match int_errors /[1-9][0-9]* if down drop/
+syn match int_errors /[1-9][0-9]* input with dribble/
+syn match int_errors /[1-9][0-9]* output buffer failures/
+syn match int_errors /[1-9][0-9]* underrun/
+syn match int_errors /[1-9][0-9]* ignored/
+syn match int_errors /[1-9][0-9]* storm suppression/
+syn match int_errors /[1-9][0-9]* abort/
+syn match int_errors /[eE]rr[Dd]isable[d ]/
+syn match int_errors /Pkts discarded on ingress *: [1-9][0-9]*/
 exe s:h . " int_errors " . s:error
 
 "}}}
@@ -451,7 +453,7 @@ exe s:h . " mbitsec5b " . s:bold . s:mbitssec
 
 
 syn region gbitsec_reg start=/\(BW\|bandwidth is\) [0-9]\{7} / end=/Kbit/ oneline keepend contains=gbitsec2b,gbitsec3b,gbitsec4b
-syn match gbitsec4b excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec4b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec4b " . s:bold . s:kbitssec
 syn match gbitsec3b excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec4b
 exe s:h . " gbitsec3b " . s:bold . s:mbitssec
@@ -459,7 +461,7 @@ syn match gbitsec2b excludenl  /[0-9]\{1}/ contained nextgroup=gbitsec3b
 exe s:h . " gbitsec2b " . s:bold . s:gbitssec
 
 syn region gbitsec_reg2 start=/\(BW\|bandwidth is\) [0-9]\{8} / end=/Kbit/ oneline keepend contains=gbitsec5b,gbitsec6b,gbitsec7b
-syn match gbitsec7b excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec7b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec7b " . s:bold . s:kbitssec
 syn match gbitsec6b excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec7b
 exe s:h . " gbitsec6b " . s:bold . s:mbitssec
@@ -467,7 +469,7 @@ syn match gbitsec5b excludenl  /[0-9]\{2}/ contained nextgroup=gbitsec6b
 exe s:h . " gbitsec5b " . s:bold . s:gbitssec
 
 syn region gbitsec_reg3 start=/\(BW\|bandwidth is\) [0-9]\{9} / end=/Kbit/ oneline keepend contains=gbitsec8b,gbitsec9b,gbitsec10b
-syn match gbitsec10b excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec10b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec10b " . s:bold . s:kbitssec
 syn match gbitsec9b excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec10b
 exe s:h . " gbitsec9b " . s:bold . s:mbitssec
@@ -476,7 +478,7 @@ exe s:h . " gbitsec8b " . s:bold . s:gbitssec
 
 
 syn region tbitsec_reg start=/\(BW\|bandwidth is\) [0-9]\{10} / end=/Kbit/ oneline keepend contains=tbitsec2b,tbitsec3b,tbitsec4b,tbitsec5b
-syn match tbitsec5b excludenl /[0-9]\{3}/ contained 
+syn match tbitsec5b excludenl /[0-9]\{3}/ contained
 exe s:h . " tbitsec5b " . s:bold . s:kbitssec
 syn match tbitsec4b excludenl /[0-9]\{3}/ contained nextgroup=tbitsec5b
 exe s:h . " tbitsec4b " . s:bold . s:mbitssec
@@ -488,23 +490,23 @@ exe s:h . " tbitsec2b " . s:bold . s:tbitssec
 
 " input/output bits per second {{{ 1
 syn region bitsec_reg start=/ \(rate\|is\) [0-9]\{2,3} / end=/bit\/sec/ oneline keepend contains=bitsec
-syn match bitsec excludenl /[0-9]\{1,3}/ contained 
+syn match bitsec excludenl /[0-9]\{1,3}/ contained
 exe s:h . " bitsec " . s:bold . s:bitssec
 
 syn region kbitsec_reg start=/\(is\|rate\) [0-9]\{4} / end=/bit/  oneline keepend contains=kbitsec1,kbitsec2
-syn match kbitsec2 excludenl /[0-9]\{3}/ contained 
+syn match kbitsec2 excludenl /[0-9]\{3}/ contained
 exe s:h . " kbitsec2 " . s:bold . s:bitssec
 syn match kbitsec1 excludenl  /[0-9]\{1}/ contained nextgroup=kbitsec2
 exe s:h . " kbitsec1 " . s:bold . s:kbitssec
 
-syn region kbitsec_reg2 start=/\(is\|rate\) [0-9]\{5} / end=/bit/  oneline keepend contains=kbitsec3,kbitsec4 
-syn match kbitsec4 excludenl /[0-9]\{3}/ contained 
+syn region kbitsec_reg2 start=/\(is\|rate\) [0-9]\{5} / end=/bit/  oneline keepend contains=kbitsec3,kbitsec4
+syn match kbitsec4 excludenl /[0-9]\{3}/ contained
 exe s:h . " kbitsec4 " . s:bold . s:bitssec
 syn match kbitsec3 excludenl  / [0-9]\{2}/ contained nextgroup=kbitsec4
 exe s:h . " kbitsec3 " . s:bold . s:kbitssec
 
 syn region kbitsec_reg3 start=/\(is\|rate\) [0-9]\{6} / end=/bit/  oneline keepend contains=kbitsec5,kbitsec6
-syn match kbitsec6 excludenl /[0-9]\{3}/ contained 
+syn match kbitsec6 excludenl /[0-9]\{3}/ contained
 exe s:h . " kbitsec6 " . s:bold . s:bitssec
 syn match kbitsec5 excludenl  / [0-9]\{3}/ contained nextgroup=kbitsec6
 exe s:h . " kbitsec5 " . s:bold . s:kbitssec
@@ -512,7 +514,7 @@ exe s:h . " kbitsec5 " . s:bold . s:kbitssec
 
 
 syn region mbitsec_reg start=/\(is\|rate\) [0-9]\{7} / end=/bit/ oneline keepend contains=mbitsec1,mbitsec2,mbitsec3
-syn match mbitsec3 excludenl  /[0-9]\{3}/ contained 
+syn match mbitsec3 excludenl  /[0-9]\{3}/ contained
 exe s:h . " mbitsec3 " . s:bold . s:bitssec
 syn match mbitsec2 excludenl  /[0-9]\{3}/ contained nextgroup=mbitsec3
 exe s:h . " mbitsec2 " . s:bold . s:kbitssec
@@ -520,7 +522,7 @@ syn match mbitsec1 excludenl  /[0-9]\{1}/ contained nextgroup=mbitsec2
 exe s:h . " mbitsec1 " . s:bold . s:mbitssec
 
 syn region mbitsec_reg2 start=/\(is\|rate\) [0-9]\{8} / end=/bit/ oneline keepend contains=mbitsec4,mbitsec5,mbitsec6
-syn match mbitsec6 excludenl  /[0-9]\{3}/ contained 
+syn match mbitsec6 excludenl  /[0-9]\{3}/ contained
 exe s:h . " mbitsec6 " . s:bold . s:bitssec
 syn match mbitsec5 excludenl  /[0-9]\{3}/ contained nextgroup=mbitsec6
 exe s:h . " mbitsec5 " . s:bold . s:kbitssec
@@ -528,7 +530,7 @@ syn match mbitsec4 excludenl  /[0-9]\{2}/ contained nextgroup=mbitsec5
 exe s:h . " mbitsec4 " . s:bold . s:mbitssec
 
 syn region mbitsec_reg3 start=/\(is\|rate\) [0-9]\{9} / end=/bit/ oneline keepend contains=mbitsec9,mbitsec8,mbitsec7
-syn match mbitsec7 excludenl  /[0-9]\{3}/ contained 
+syn match mbitsec7 excludenl  /[0-9]\{3}/ contained
 exe s:h . " mbitsec7 " . s:bold . s:bitssec
 syn match mbitsec8 excludenl  /[0-9]\{3}/ contained nextgroup=mbitsec7
 exe s:h . " mbitsec8 " . s:bold . s:kbitssec
@@ -538,7 +540,7 @@ exe s:h . " mbitsec9 " . s:bold . s:mbitssec
 
 
 syn region gbitsec_reg start=/\(is\|rate\) [0-9]\{10} / end=/bit/ oneline keepend contains=gbitsec1,gbitsec2,gbitsec3,gbitsec4
-syn match gbitsec4 excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec4 excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec4 " . s:bold . s:bitssec
 syn match gbitsec3 excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec4
 exe s:h . " gbitsec3 " . s:bold . s:kbitssec
@@ -548,7 +550,7 @@ syn match gbitsec1 excludenl  /[0-9]\{1}/ contained nextgroup=gbitsec2
 exe s:h . " gbitsec1 " . s:bold . s:gbitssec
 
 syn region gbitsec_reg2 start=/\(is\|rate\) [0-9]\{11} / end=/bit/ oneline keepend contains=gbitsec5,gbitsec6,gbitsec7,gbitsec8
-syn match gbitsec8 excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec8 excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec8 " . s:bold . s:bitssec
 syn match gbitsec7 excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec8
 exe s:h . " gbitsec7 " . s:bold . s:kbitssec
@@ -558,7 +560,7 @@ syn match gbitsec5 excludenl  /[0-9]\{2}/ contained nextgroup=gbitsec6
 exe s:h . " gbitsec5 " . s:bold . s:gbitssec
 
 syn region gbitsec_reg3 start=/\(is\|rate\) [0-9]\{12} / end=/bit/ oneline keepend contains=gbitsec9,gbitsec10,gbitsec11,gbitsec12
-syn match gbitsec12 excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec12 excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec12 " . s:bold . s:bitssec
 syn match gbitsec11 excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec12
 exe s:h . " gbitsec11 " . s:bold . s:kbitssec
@@ -569,7 +571,7 @@ exe s:h . " gbitsec9 " . s:bold . s:gbitssec
 
 
 syn region tbitsec_reg start=/\(is\|rate\) [0-9]\{13} / end=/bit/ oneline keepend contains=tbitsec1,tbitsec2,tbitsec3,tbitsec4,tbitsec5
-syn match tbitsec5 excludenl /[0-9]\{3}/ contained 
+syn match tbitsec5 excludenl /[0-9]\{3}/ contained
 exe s:h . " tbitsec5 " . s:bold . s:bitssec
 syn match tbitsec4 excludenl /[0-9]\{3}/ contained nextgroup=tbitsec5
 exe s:h . " tbitsec4 " . s:bold . s:kbitssec
@@ -584,10 +586,10 @@ exe s:h . " tbitsec1 " . s:bold . s:tbitssec
 
 "}}}
 " other show interface info of interest {{{
-syn match channel_members /Members in this channel:/ 
+syn match channel_members /Members in this channel:/
 exe s:h . " channel_members " . s:fgmagenta
 
-syn match half_duplex /[Hh]alf-duplex/ 
+syn match half_duplex /[Hh]alf-duplex/
 exe s:h . " half_duplex " . s:fgwhite . s:bgred
 
 syn region media_type excludenl start=/media type is /hs=e+1 end=/$/ excludenl
@@ -596,16 +598,16 @@ exe s:h . " media_type " . s:fgpurple
 syn match output_drops /output drops: [1-9][0-9]*/ excludenl
 exe s:h . " output_drops " . s:bold . s:fgwhite . s:bgred
 
-syn match no_input_output_rate /rate 0 bits\/sec/hs=s+4 
+syn match no_input_output_rate /rate 0 bits\/sec/hs=s+4
 exe s:h . " no_input_output_rate " . s:fgred
 
 syn match tx_rx_load /[rt]xload [0-9]\{1,3}\/[0-9]\{1,3}/ excludenl
 exe s:h . " tx_rx_load " . s:fgblue
 
-syn match jumbos /[1-9][0-9]* jumbo/ 
+syn match jumbos /[1-9][0-9]* jumbo/
 exe s:h . "jumbos" . s:bold . s:bgred
 
-syn match is_down /is down/ 
+syn match is_down /is down/
 exe s:h . " is_down " . s:ul . s:fgred
 
 syn match is_up /is up/
@@ -731,7 +733,7 @@ exe s:h . "vserviceline_kw1" . s:ul . s:keyword2
 syn match vserviceline_type /[^ ]\+$/       contained
 exe s:h . "vserviceline_type" . s:ul_bold . s:fgpurple
 
-syn match vserviceline_path_name /[^ ]\+/   contained 
+syn match vserviceline_path_name /[^ ]\+/   contained
 exe s:h . "vserviceline_path_name" . s:ul . s:fgcyan
 
 syn match vserviceline_node_name /[^ ]\+ /  contained nextgroup=vserviceline_kw1
@@ -747,7 +749,7 @@ exe s:h . "vservice" .  s:keyword1
 syn match vservice_mode /path /         contained containedin=vservice nextgroup=vservice_path_name
 exe s:h . "vservice_mode" . s:fgorange
 
-syn match vservice_path_name /[^ ]\+/   contained 
+syn match vservice_path_name /[^ ]\+/   contained
 exe s:h . "vservice_path_name" . s:fgcyan
 
 syn region vservice_line start=/^  vservice / end=/.$/ excludenl transparent keepend contains=vservice
@@ -816,7 +818,7 @@ exe s:h . "DeviceID_Serial" . s:fgorange
 syn match DeviceID_kw excludenl /Device ID: \?/ nextgroup=DeviceID_text
 "exe s:h . "DeviceID_kw" . s:fgblue
 
-"syn region DeviceID start="Device ID:" end=".$" contains=DeviceID_kw,DeviceID_Serial,DeviceID_text keepend transparent 
+"syn region DeviceID start="Device ID:" end=".$" contains=DeviceID_kw,DeviceID_Serial,DeviceID_text keepend transparent
 
 syn match SystemName_text excludenl /[^ ]\+/ contained keepend
 exe s:h . "SystemName_text" . s:fgblue
@@ -824,16 +826,16 @@ exe s:h . "SystemName_text" . s:fgblue
 syn match SystemName_KW excludenl /System Name:/ keepend nextgroup=SystemName_text skipwhite
 "exe s:h . "SystemName_KW" . s:fgblue
 
-"syn region SystemName start="System Name:" end=".$" contains=SystemName_KW,SystemName_text keepend transparent 
+"syn region SystemName start="System Name:" end=".$" contains=SystemName_KW,SystemName_text keepend transparent
 
 "}}}
 " Misc Global Keywords {{{
-" 
+"
 syntax match ciscono / no /
 syntax match ciscono /^no /
 exe s:h . "ciscono" . s:fgred
 
-syn match connected /connected/ 
+syn match connected /connected/
 exe s:h . "connected" . s:fggreen
 
 syn match notconnect /not *connect/
@@ -880,16 +882,16 @@ syn match feature /[^ ]\+ */ contained
 exe s:h . "feature" . s:parameter2
 
 syn match permit_statement /permit/
-exe s:h . "permit_statement" . s:fggreen 
+exe s:h . "permit_statement" . s:fggreen
 
 syn match deny_statement /deny/
-exe s:h . "deny_statement" . s:fgred 
+exe s:h . "deny_statement" . s:fgred
 
 syn match match_any_keyword /match-any / nextgroup=match_any_text
 exe s:h . "match_any_keyword" . s:parameter4
 
 syn match match_any_text /[^ ]\+ */ contained
-exe s:h . "match_any_text" . s:parameter2 
+exe s:h . "match_any_text" . s:parameter2
 
 syn match keyword2 / location/ nextgroup=name_text skipwhite
 syn match keyword2 /contact/ nextgroup=name_text skipwhite
@@ -930,14 +932,14 @@ exe s:h . "shutdown" . s:parameter5
 
 syn match no_shutdown /no shut/
 syn match no_shutdown /no shutdown/
-exe s:h . "no_shutdown" . s:bold . s:fggreen 
+exe s:h . "no_shutdown" . s:bold . s:fggreen
 
 "}}}
 " show vlan region {{{
 "syntax match vlannumber /^[0-9]\{1,4}/ contained nextgroup=vlanname
 "HiLink    vlannumber       Keyword
 "syntax match vlanname /[a-zA-Z]\{1,32}/ contained
-"HiLink    vlanname         Repeat  
+"HiLink    vlanname         Repeat
 "syntax region showvlan start="sh.*vl" end="^[^ ]\{1,63}#" end=/[\r]\{1,63}\#/ contains=vlannumber,ciscointerfacetype,more,ciscointregion,hash_prompt
 "}}}
 " MTU {{{
@@ -958,7 +960,7 @@ syn match ciscodescriptiontext excludenl /.*$/ contained
 exe s:h . "ciscodescriptiontext" . s:description
 
 syn match commenttext excludenl /.*$/ contained
-exe s:h . "commenttext"  . s:italic . s:fggray 
+exe s:h . "commenttext"  . s:italic . s:fggray
 
 syn region comment excludenl start=/\!/ end=/$/ contains=commenttext keepend transparent
 
@@ -1033,16 +1035,20 @@ syn region vrf_region start="vrf context" start="vrf forwarding" start="vrf memb
 " This is a good example of why cisco highlighting can't really be done well
 " in the context of highlighting a conventional programming language.  One
 " could simply re-use keyword, preproc, repeat, and so forth, but it's more
-" straightforward to just write "purple", blue, green, and so forth.  That said,
+" straightforward to just say "purple", blue, green, and so forth.  That said,
 " the highlighting variable "s:keyword" is used in places, but not to the
-" extent of "s:keyword,2,3,4" and so on.
+" extent of "s:keyword,2,3,4" and so on.  That's one approach that would
+" make it easier to have custom color schemes, but that also doesn't fit the
+" paradigm of highlighting a conventional programming language.
 "
+" TODO  make these local to each subgroup, even at the expense of defining
+"       the same pattern with different names
 
-"syn match switchport_kw_err excludenl /\v[^ ]+/ contained 
+"syn match switchport_kw_err excludenl /\v[^ ]+/ contained
 "exe s:h . "switchport_kw_err" . s:rev . s:fgred
 
-syn match encapsulation_tag excludenl /\v[0-9]{1,4}/ contained 
-syn match encapsulation_tag excludenl /ethertype/ contained 
+syn match encapsulation_tag excludenl /\v[0-9]{1,4}/ contained
+syn match encapsulation_tag excludenl /ethertype/ contained
 exe s:h . "encapsulation_tag" . s:parameter2
 
 syn match switchport_keyword /switchport/
@@ -1050,21 +1056,21 @@ exe s:h . "switchport_keyword" . s:keyword1
 
 " the base set following the root.
 " TODO  each should get its own subregion
-syn match switchport_base_kwds excludenl /access/         contained 
+syn match switchport_base_kwds excludenl /access/         contained
 syn match switchport_base_kwds excludenl /autostate/      contained skipwhite nextgroup=switchport_autostate_kw,switchport_kw_err
 syn match switchport_base_kwds excludenl /backup/         contained skipwhite nextgroup=switchport_backup_kw,switchport_kw_err
 syn match switchport_base_kwds excludenl /block/          contained skipwhite nextgroup=switchport_block_kw,switchport_kw_err
-syn match switchport_base_kwds excludenl /capture/        contained 
+syn match switchport_base_kwds excludenl /capture/        contained
 syn match switchport_base_kwds excludenl /dot1q /         contained
-syn match switchport_base_kwds excludenl /host/           contained 
+syn match switchport_base_kwds excludenl /host/           contained
 syn match switchport_base_kwds excludenl /mode/           contained skipwhite nextgroup=switchport_mode_kwds
-syn match switchport_base_kwds excludenl /monitor/        contained 
-syn match switchport_base_kwds excludenl /trunk/          contained 
-syn match switchport_base_kwds excludenl /port-security/  contained 
-syn match switchport_base_kwds excludenl /private-vlan/   contained skipwhite nextgroup=switchport_mode_privatevlan_kwds 
-syn match switchport_base_kwds excludenl /block/          contained 
-syn match switchport_base_kwds excludenl /priority/       contained 
-syn match switchport_base_kwds excludenl /encapsulation/  contained 
+syn match switchport_base_kwds excludenl /monitor/        contained
+syn match switchport_base_kwds excludenl /trunk/          contained
+syn match switchport_base_kwds excludenl /port-security/  contained
+syn match switchport_base_kwds excludenl /private-vlan/   contained skipwhite nextgroup=switchport_mode_privatevlan_kwds
+syn match switchport_base_kwds excludenl /block/          contained
+syn match switchport_base_kwds excludenl /priority/       contained
+syn match switchport_base_kwds excludenl /encapsulation/  contained
 exe s:h . "switchport_base_kwds" . s:keyword2
 
 " the switchport_command region contains subregions which in turn have end of line terminations
@@ -1087,7 +1093,7 @@ exe s:h . "switchport_block_kw" . s:keyword4
 " switchport dot1q ethertype {{{2
 
 syn match switchport_dot1q_kw /[dD]ot1[qQ] / contained containedin=switchport_dot1q_ethertype_region
-exe s:h . "switchport_dot1q_kw" . s:keyword2 
+exe s:h . "switchport_dot1q_kw" . s:keyword2
 
 syn match switchport_dot1q_ethertype_kw /ethertype/ contained containedin=switchport_dot1q_ethertype_region skipwhite nextgroup=switchport_dot1q_ethertype_value
 exe s:h . "switchport_dot1q_ethertype_kw" . s:keyword3
@@ -1103,7 +1109,7 @@ syn match switchport_capture_allowed_vlan excludenl  /add/     contained contain
 syn match switchport_capture_allowed_vlan excludenl  /except/  contained containedin=switchport_capture_allowed_vlan_region skipwhite nextgroup=switchport_capture_allowed_vlan_kw
 syn match switchport_capture_allowed_vlan excludenl  /remove/  contained containedin=switchport_capture_allowed_vlan_region skipwhite nextgroup=switchport_capture_allowed_vlan_kw
 syn match switchport_capture_allowed_vlan excludenl  /all/     contained containedin=switchport_capture_allowed_vlan_region
-exe s:h . "switchport_capture_allowed_vlan" . s:keyword3 
+exe s:h . "switchport_capture_allowed_vlan" . s:keyword3
 
 syn match switchport_capture_allowed_vlan_kw excludenl  /vlan/ contained containedin=switchport_capture_allowed_vlan_region
 exe s:h . "switchport_capture_allowed_vlan_kw" . s:keyword4
@@ -1119,10 +1125,10 @@ syn region switchport_capture_allowed_vlan_region matchgroup=switchport_base_kwd
 " switchport access {{{2
 
 syn match switchport_conf_access_vlan_kw excludenl  /vlan/ skipwhite contained containedin=switchport_conf_access nextgroup=switchport_conf_access_kw_WORDS
-exe s:h . "switchport_conf_access_vlan_kw" . s:keyword4 
+exe s:h . "switchport_conf_access_vlan_kw" . s:keyword4
 
 syn match switchport_conf_access_kw_WORDS excludenl  /[0-9 ,]\+/ contained containedin=switchport_conf_access
-exe s:h . "switchport_conf_access_kw_WORDS" . s:parameter 
+exe s:h . "switchport_conf_access_kw_WORDS" . s:parameter
 
 syn region switchport_conf_access matchgroup=switchport_base_kwds start=/access/rs=e end=/$/ skipwhite contained containedin=switchport_command
 
@@ -1132,18 +1138,18 @@ syn region switchport_conf_access matchgroup=switchport_base_kwds start=/access/
 syn match switchport_trunk_kwds /encapsulation/ contained skipwhite containedin=switchport_trunk nextgroup=switchport_trunk_encap_kwds
 syn match switchport_trunk_kwds /ethertype/     contained skipwhite containedin=switchport_trunk nextgroup=switchport_trunk_ethertype_value
 syn match switchport_trunk_kwds /pruning/       contained skipwhite containedin=switchport_trunk nextgroup=switchport_trunk_pruning_vlan_list
-syn match switchport_trunk_kwds /allowed/       contained skipwhite containedin=switchport_trunk 
-syn match switchport_trunk_kwds /native/        contained skipwhite containedin=switchport_trunk 
+syn match switchport_trunk_kwds /allowed/       contained skipwhite containedin=switchport_trunk
+syn match switchport_trunk_kwds /native/        contained skipwhite containedin=switchport_trunk
 exe s:h . "switchport_trunk_kwds" . s:keyword3
 
 syn match switchport_trunk_encap_kwds /encapsulation [Dd]ot1[qQ]/ms=s+13,hs=s+13 contained containedin=switchport_trunk_encap_kwds
 syn match switchport_trunk_encap_kwds /[iI][sS][lL]/ contained containedin=switchport_trunk_kwds,switchport_trunk,switchport_command
 syn match switchport_trunk_encap_kwds /negotiate/ contained containedin=switchport_trunk_kwds,switchport_trunk
-exe s:h . "switchport_trunk_encap_kwds" . s:keyword4 
+exe s:h . "switchport_trunk_encap_kwds" . s:keyword4
 
 syn match switchport_trunk_native_vlan_ID /\d\{-1,4}/ contained containedin=switchport_trunk_kwds
 syn match switchport_trunk_native_vlan_ID /tag/       contained containedin=switchport_trunk_kwds
-exe s:h . "switchport_trunk_native_vlan_ID" . s:parameter 
+exe s:h . "switchport_trunk_native_vlan_ID" . s:parameter
 
 syn match switchport_trunk_ethertype_value /0x[05-9a-fA-F][e-fE-F]\{0,1}[fF]\{0,1}[fF]\{0,1}/ contained containedin=switchport_trunk_kwds
 exe s:h . "switchport_trunk_ethertype_value" . s:parameter
@@ -1159,7 +1165,7 @@ syn match switchport_trunk_allowed_vlan_kwds /add/      skipwhite contained cont
 syn match switchport_trunk_allowed_vlan_kwds /all/      skipwhite contained containedin=switchport_trunk_allowed_vlan_region
 syn match switchport_trunk_allowed_vlan_kwds /except/   skipwhite contained containedin=switchport_trunk_allowed_vlan_region nextgroup=switchport_trunk_allowed_vlan_list
 syn match switchport_trunk_allowed_vlan_kwds /remove/   skipwhite contained containedin=switchport_trunk_allowed_vlan_region nextgroup=switchport_trunk_allowed_vlan_list
-syn match switchport_trunk_allowed_vlan_kwds /none/     contained 
+syn match switchport_trunk_allowed_vlan_kwds /none/     contained
 exe s:h . "switchport_trunk_allowed_vlan_kwds" . s:keyword5
 
 syn match switchport_trunk_allowed_vlan_list /\v[0-9,\- ]+/ contained containedin=switchport_trunk_allowed_vlan_kwds,switchport_trunk_allowed_vlan_region
@@ -1204,7 +1210,7 @@ exe s:h . "switchport_mode_privatevlan_kwds" . s:keyword4
 syn match switchport_privatevlan_1 /\v[0-9\- ]+/ contained containedin=switchport_mode_privatevlan_kwds skipwhite nextgroup=switchport_privatevlan_2
 exe s:h . "switchport_privatevlan_1" . s:parameter2
 
-syn match switchport_privatevlan_2 /\v[0-9\- ]+/ contained 
+syn match switchport_privatevlan_2 /\v[0-9\- ]+/ contained
 exe s:h . "switchport_privatevlan_2" . s:parameter4
 "hi switchport_privatevlan_2 ctermfg=red guifg=red gui=italic
 
@@ -1237,7 +1243,7 @@ syn region switchport_block matchgroup=switchport_base_kwds start=/block/rs=e en
 syn match switchport_priority_extend_kw /extend/    contained containedin=switchport_priority nextgroup=switchport_priority_extend_words
 exe s:h . "switchport_priority_extend_kw" . s:keyword3
 
-syn match switchport_priority_extend_words /trust/  contained containedin=switchport_priority 
+syn match switchport_priority_extend_words /trust/  contained containedin=switchport_priority
 syn match switchport_priority_extend_words /[0-7]/  contained containedin=switchport_priority
 syn match switchport_priority_extend_words /cos/    contained skipwhite containedin=switchport_priority nextgroup=switchport_extent_cos_values
 exe s:h . "switchport_priority_extend_words" . s:keyword4
@@ -1268,7 +1274,7 @@ syn region encapsulation_command excludenl start=/encapsulation / end=/$/ keepen
 " NOTE: this is currently a template to be backmigrated to other areas if it
 " works out well - JDB 1/9/2015
 
-syn region channel_group_region start=/channel-group / end=/$/ transparent 
+syn region channel_group_region start=/channel-group / end=/$/ transparent
 
 syn match channel_group_kw /channel-group/ contained containedin=channel_group_region skipwhite nextgroup=channel_group_number
 exe s:h . "channel_group_kw" . s:keyword1
@@ -1286,7 +1292,7 @@ syn match channel_group_mode /auto/         contained
 syn match channel_group_mode /desirable/    contained
 exe s:h . "channel_group_mode" . s:parameter
 
-syn region channel_protocol_region start=/channel-protocol / end=/$/ transparent 
+syn region channel_protocol_region start=/channel-protocol / end=/$/ transparent
 
 syn match channel_protocol_kw /channel-protocol/ contained containedin=channel_protocol_region skipwhite nextgroup=channel_protocol
 exe s:h "channel_protocol_kw" . s:keyword1
@@ -1296,7 +1302,7 @@ syn match channel_protocol /pagp/ contained skipwhite
 exe s:h . "channel_protocol" . s:parameter
 
 " LACP port priority {{{2
-syn region lacp_priority_region start=/lacp port\-prior/ end=/$/ transparent 
+syn region lacp_priority_region start=/lacp port\-prior/ end=/$/ transparent
 
 syn match lacp_kw /lacp/ contained containedin=lacp_priority_region contained skipwhite containedin=lacp_priority_region
 exe s:h . "lacp_kw" . s:keyword1
@@ -1317,37 +1323,37 @@ syn region int_ip_reg matchgroup=int_ip_KW start=/^ \{1,2}ip \|# \{1,2}/ end=/$/
 syn match int_ip_KW /ip/ contained containedin=int_ip_reg
 exe s:h . "int_ip_KW" . s:keyword1
 
-syn match int_ip_reg_KW /address/            skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /arp/                skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /authentication/     skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /bandwidth/          skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /bandwidth-percent/  skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /delay/              skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /directed-broadcast/ skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /distribute-list/    skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /eigrp/              skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /hello-interval/     skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /hold-time/          skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /igmp/               skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /local-proxy-arp/    skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /mtu/                skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /next-hop-self/      skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /offset-list/        skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /passive-interface/  skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /pim/                skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /port-unreachable/   skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /proxy-arp/          skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /redirects/          skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /router/             skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /split-horizon/      skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /summary-address/    skipwhite contained containedin=int_ip_reg 
-syn match int_ip_reg_KW /unreachables/       skipwhite contained containedin=int_ip_reg 
+syn match int_ip_reg_KW /address/            skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /arp/                skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /authentication/     skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /bandwidth/          skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /bandwidth-percent/  skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /delay/              skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /directed-broadcast/ skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /distribute-list/    skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /eigrp/              skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /hello-interval/     skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /hold-time/          skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /igmp/               skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /local-proxy-arp/    skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /mtu/                skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /next-hop-self/      skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /offset-list/        skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /passive-interface/  skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /pim/                skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /port-unreachable/   skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /proxy-arp/          skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /redirects/          skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /router/             skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /split-horizon/      skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /summary-address/    skipwhite contained containedin=int_ip_reg
+syn match int_ip_reg_KW /unreachables/       skipwhite contained containedin=int_ip_reg
 exe s:h . "int_ip_reg_KW" . s:keyword2
 
 " }}}
 
 " ip {{{"{{{
-syn region ip start=/^ip / end=/$/ keepend transparent 
+syn region ip start=/^ip / end=/$/ keepend transparent
 
 syn match ip_route /route/ skipwhite contained containedin=ip nextgroup=ip_route_vrf
 exe s:h . "ip_route" . s:fgbrown
@@ -1363,7 +1369,7 @@ syn cluster follows_ip_route contains=ipaddr,ip_route_vrf
 syn match route_name_kw /name / skipwhite contained containedin=ip nextgroup=route_name_text
 exe s:h . "route_name_kw" . s:fgbrown
 
-syn match route_name_text /.*/ skipwhite contained 
+syn match route_name_text /.*/ skipwhite contained
 exe s:h . "route_name_text" . s:fgbluegreen
 
 syn match ip_address /address/ skipwhite contained containedin=ip
@@ -1374,7 +1380,7 @@ exe s:h . "ip_address" . s:parameter
 syn match prefix_name excludenl  / [^ ]\+/ skipwhite contained containedin=prefix_list_kw
 exe s:h . "prefix_name" . s:fgbluegreen
 
-syn match prefix_list_kw excludenl /prefix-list/ contained containedin=ip nextgroup=prefix_name skipwhite 
+syn match prefix_list_kw excludenl /prefix-list/ contained containedin=ip nextgroup=prefix_name skipwhite
 exe s:h . "prefix_list_kw" . s:keyword1
 
 syntax cluster prefix_list contains=prefix_name,prefix_list_kw
@@ -1388,24 +1394,50 @@ exe s:h . "seqnum" . s:fggreen
 "}}}
 " Ethernet address {{{
 
-syn match ethernet_address excludenl /\v[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}/ 
-syn match ethernet_address excludenl /\v[0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}/ 
+syn match ethernet_address excludenl /\v[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}/
+syn match ethernet_address excludenl /\v[0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}/
 exe s:h . "ethernet_address" . s:bold . s:fgred
 
 "}}}
 " IP Address highlighting {{{
-syn match zeros excludenl /\s0\.0\.0\.0/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite 
+" The error catching isn't really vetted out here.  It should highlight *any*
+" bad IP address or subnet mask in a way such to show it's wrong.  Doesn't
+" quite do that yet.
+"
+" experimental ip address octet by octet matching and error catch {{{2
+" ends up looking kind of trippy, but gives a good impression of how match
+" progression works.
+"
+"syn match anyerror /[^0-9]*/ contained
+"syn match anyerror /[0-9][^0-9]\+/ contained
+"HiLink    anyerror ErrorMsg
+"
+"syn match ipaddr_octet_1 /\v(25[0-4]|2[0-4]\d|1\d{,2}|\d{1,2})\./ nextgroup=ipaddr_octet_2,anyerror contained containedin=ipaddr_region
+"HiLink ipaddr_octet_1 gitcommitDiscardedType
+"
+"syn match ipaddr_octet_2 contained /\v(25[0-4]|2[0-4]\d|1\d{,2}|\d{1,2})\./ nextgroup=ipaddr_octet_3,anyerror
+"HiLink ipaddr_octet_2 pandocSubscript
+"
+"syn match ipaddr_octet_3 contained /\v(25[0-4]|2[0-4]\d|1\d{,2}|\d{1,2})\./ nextgroup=ipaddr_octet_4,anyerror
+"HiLink ipaddr_octet_3 javaScript
+"
+"syn match ipaddr_octet_4 contained /\v(25[0-4]|2[0-4]\d|1\d{,2}|\d{1,2})/ nextgroup=cidr
+"HiLink ipaddr_octet_4 helpNote
+
+"2}}}
+syn match zeros excludenl /\s0\.0\.0\.0/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite
 exe s:h . "zeros" . s:bold . s:fgpink
 
+"syn match ipaddress /(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)/
 
-syn match ipaddress excludenl /\v\s(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite 
+syn match ipaddress excludenl /\v\s(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite
 exe s:h . "ipaddress" . s:fgpink
 
 
 syn match badmask /\v (12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
-					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
-					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
-					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})excludenl / contained 
+                                           \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
+                                           \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
+                                           \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})excludenl / contained
 exe s:h . "badmask" . s:rev . s:fgred
 
 " BadIPaddr match {{{2
@@ -1435,16 +1467,16 @@ exe s:h . "subnetmask" . s:italic . s:keyword1
 syn match wildcard contained excludenl  /\v (127|63|31|15|7|3|1|0)\.(255|127|63|31|15|7|3|1|0)\.(255|127|63|31|15|7|3|1|0)\.(255|127|63|31|15|7|3|1|0)/he=e+1
 exe s:h . "wildcard" . s:italic . s:fgblue
 
-syn match ipaddr_kw excludenl /ip address/ contained 
+syn match ipaddr_kw excludenl /ip address/ contained
 exe s:h . "ipaddr_kw" . s:keyword1
 
-syn match badmaskoctect excludenl /\v( 12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})/ contained 
+syn match badmaskoctect excludenl /\v( 12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})/ contained
 exe s:h . "badmaskoctect" . s:standout . s:fgred
 
 syn match ipaddr_anyerror "\a\|\d\|[.()!#^&*\-_=+{};'",.excludenl  /<>?]\+" contained containedin=ipaddr_region
 exe s:h . "ipaddr_anyerror" . s:rev . s:fgred
 
-syn match ipaddr_otherkw_param excludenl /.\+$/ contained 
+syn match ipaddr_otherkw_param excludenl /.\+$/ contained
 exe s:h . "ipaddr_otherkw_param" . s:fgorange
 
 " add more keywords that follow "ip address" in various places below as needed.
@@ -1454,7 +1486,7 @@ exe s:h . "ipaddr_other_keywords" . s:bold . s:keyword2
 syn match ipaddr_cidr contained excludenl   /\v[/]\d{1,3}/
 exe s:h . "ipaddr_cidr" . s:italic . s:keyword1
 
-syn match ipaddr excludenl /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask,wildcard,skipwhite contained 
+syn match ipaddr excludenl /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask,wildcard,skipwhite contained
 exe s:h . "ipaddr" . s:fgpink
 
 syn region ipaddr_subnetmask_in_ipaddr matchgroup=subnetmask start=/\v(0|192|224|240|248|252|254|255)\.(0|128|192|240|224|248|252|254|255)\.(0|128|192|224|240|248|252|254|255)\.(0|128|192|224|240|248|252|254|255)/ end=/$/ keepend skipwhite transparent excludenl contains=subnetmask contained
@@ -1469,7 +1501,7 @@ syn region ipaddr_region matchgroup=ipaddr_kw start=/ip addr[e]\{,1}[s]\{,1}[s]\
 syntax match timestamp excludenl / \d\d:\d\d:\d\d[ .]/ keepend nextgroup=subseconds
 exe s:h . "timestamp" . s:fgbluegreen
 
-syntax match subseconds excludenl /\.\d\+/ contained keepend skipwhite 
+syntax match subseconds excludenl /\.\d\+/ contained keepend skipwhite
 exe s:h . "subseconds" . s:italic . s:fggray
 
 syntax match ciscoerror excludenl /%[^ ]\{-}:/ keepend skipwhite excludenl
@@ -1487,7 +1519,7 @@ exe s:h . "ciscoerror" . s:bold . s:fgred
 "syntax match devicetimestamp /\d\d:\d\d:\d\d/ contained keepend
 "exe s:h . "match" . s:fgbluegreen
 
-"syntax match devicedaystamp / \u\w\+\s\+\d\+\s / nextgroup=devicetimestamp skipwhite keepend 
+"syntax match devicedaystamp / \u\w\+\s\+\d\+\s / nextgroup=devicetimestamp skipwhite keepend
 "exe s:h . "match" . s:fgorange
 
 "}}}
@@ -1500,15 +1532,15 @@ syn match config_prompt_hostname excludenl  /^[^ ]\{-1,63}(/ contained nextgroup
 exe s:h . "config_prompt_hostname" . s:fgwhite . s:bgbluegreen
 "hi config_prompt_hostname ctermfg=white ctermbg=darkred guibg=firebrick guifg=white
 
-syn match config_word excludenl /config/ contained 
+syn match config_word excludenl /config/ contained
 exe s:h . "config_word" . s:fgwhite . s:bgred
 "hi config_word ctermbg=red ctermfg=white guibg=red guifg=white
 
-syn match config_mode excludenl /-[^ )]\{1,32}/ contained 
+syn match config_mode excludenl /-[^ )]\{1,32}/ contained
 exe s:h . "config_mode" . s:fgwhite . s:bgorange
 "hi config_mode ctermbg=darkyellow ctermfg=white guibg=darkorange guifg=white
 
-syn match config_prompt_end excludenl /)#/ contained 
+syn match config_prompt_end excludenl /)#/ contained
 exe s:h . "config_prompt_end" . s:fgwhite . s:bgbluegreen
 "hi config_prompt_end ctermfg=white ctermbg=darkred guibg=firebrick guifg=white
 
