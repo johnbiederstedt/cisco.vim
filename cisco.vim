@@ -100,8 +100,6 @@
 "           .627
 "               Added coloring of any large numbers in liu of the rate
 "               highlighting for interface statistics
-"           .628
-"               General minor additions; speed auto, lines (con, aux, vty)
 "
 "
 " }}}
@@ -113,7 +111,7 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-"syn case ignore
+syn case ignore
 setlocal iskeyword+=/
 setlocal iskeyword+=:
 setlocal iskeyword+=.
@@ -166,12 +164,12 @@ if (has("gui_running"))
         let s:purple        =   "#af5fff"  " 256 term color 135
         let s:pink          =   "#ff5fd7"  " 256 term color 206
         let s:lime          =   "#5fff00"  " 256 term color 82
-        let s:emph_bg       =   "#400000"  " 256 term color 0
+        let s:emph_bg       =   "#300000"  " 256 term color 0
         let s:lightblue     =   "#00afff"  " 256 term color 39
     endif
 else " assume terminal mode
     let s:vmode = " cterm"
-    if &t_Co == 256
+    if &t_Co == 256 " find better way to test for whether or not the terminal support 256 colors
         if g:cisco_background == "grey"
             let s:white         =   "15"
             let s:gray          =   "244"
@@ -504,7 +502,7 @@ synt match ciscointerfacetype excludenl /[Ss]erial \{0,1}/                      
 synt match ciscointerfacetype excludenl /[Ll]o \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
 synt match ciscointerfacetype excludenl /[Ll]oop \{0,1}/                         nextgroup=ciscointerfacenumber skipwhite contained 
 synt match ciscointerfacetype excludenl /[Ll]oopback \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]un \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained 
+synt match ciscointerfacetype excludenl /[Tt]un\{0,1} \{0,1}/                    nextgroup=ciscointerfacenumber skipwhite contained 
 synt match ciscointerfacetype excludenl /[Tt]unnel \{0,1}/                       nextgroup=ciscointerfacenumber skipwhite contained 
 synt match ciscointerfacetype excludenl /[Pp][oO][sS]\{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
 synt match ciscointerfacetype excludenl /[Pp]o \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
@@ -551,7 +549,7 @@ synt region ciscointregion excludenl start="\v[lL]oopback {0,1}\d{-1,2}"        
 synt region ciscointregion excludenl start="\v[tT]unnel {0,1}\d{-1,2}"                       end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
 synt region ciscointregion excludenl start="\v[sS]erial {0,1}\d{-1,2}"                       end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
 synt region ciscointregion excludenl start="\v[lL]o {0,1}\d{1,4}[^0-9a-zA-Z]"                end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
-synt region ciscointregion excludenl start="\v[tT]un {0,1}\d{1,4}[^0-9a-zA-Z]"               end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
+synt region ciscointregion excludenl start="\v[tT]un{0,1} {0,1}\d{1,4}[^0-9a-zA-Z]"          end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
 synt region ciscointregion excludenl start="\v[sS]er {0,1}\d{1,4}[^0-9a-zA-Z]"               end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
 synt region ciscointregion excludenl start="\vmgmt\d{1,2}[^0-9a-zA-Z]"                       end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
 "synt region ciscointregion excludenl start="Null0"                                           end=/$/ end="[,-: ]\|\s" transparent contains=ciscointerfacetype
@@ -771,7 +769,6 @@ synt match interface_speed /^ \?speed/ nextgroup=speed skipwhite
 exe s:h . " interface_speed " . s:keyword1
 
 synt match speed /[0-9]\{2,5}/ contained containedin=interface_speed
-synt match speed /auto/ contained containedin=interface_speed
 exe s:h . " speed " . s:bold . s:parameter1
 
 synt match duplex_error excludenl /\v[^ ]+/ contained
@@ -1692,7 +1689,6 @@ synt match logging_kw2 /server\-arp/          skipwhite contained
 synt match logging_kw2 /source\-interface/    skipwhite contained
 synt match logging_kw2 /trap/                 skipwhite contained
 synt match logging_kw2 /userinfo/             skipwhite contained
-synt match logging_kw2 /synchronous/          skipwhite contained
 exe s:h . "logging_kw2" . s:keyword2
 " }}}2
 
@@ -2196,34 +2192,6 @@ exe s:h . " pbytes11b " . s:bold . s:pbitssec
 
 "}}}
 
-" lines {{{
-" 
-synt region line start=/^line / end=/$/ keepend transparent excludenl
-
-synt match line_KW /line / contained containedin=line
-exe s:h . "line_KW" . s:keyword1 . s:underline
-
-synt match line_types /vty / contained skipwhite containedin=line nextgroup=vty_numbers
-synt match line_types /con / contained skipwhite containedin=line nextgroup=numeric_parameter1
-synt match line_types /aux / contained skipwhite containedin=line nextgroup=numeric_parameter1
-exe s:h . "line_types" . s:keyword2 . s:underline
-
-synt match vty_numbers /\v[0-9] [0-9]{1,2}/ skipwhite contained 
-exe s:h . "vty_numbers" . s:parameter1 . s:underline
-
-synt match numbers_pair /\v[0-9] [0-9]{1,2}/ skipwhite contained 
-exe s:h . "numbers_pair" . s:parameter1
-
-synt match exec_timeout /\vexec-ti[meout]{1,5} / nextgroup=numbers_pair
-exe s:h . "exec_timeout" . s:keyword1
-
-synt match privilege /\vpriv[ilege]{1,5} / skipwhite nextgroup=priv_level
-exe s:h . "privilege" . s:keyword1
-
-synt match priv_level /level / skipwhite contained nextgroup=numeric_parameter1
-exe s:h . "priv_level" . s:keyword2
-" }}}
-
 " show interface error conditions {{{
 synt match int_errors / [1-9][0-9]* collision[s]\{0,1}/hs=s+1 
 synt match int_errors / [1-9][0-9]* runts/hs=s+1 
@@ -2262,9 +2230,28 @@ synt match int_errors /Pkts discarded on ingress *: [1-9][0-9]*/hs=s+1
 exe s:h . "int_errors" . s:error
 
 "}}}
+
+" hostnames {{{
+
+synt match state /\v[a-zA-Z]{2}/ contained nextgroup=site
+exe s:h . "state" . s:keyword1
+
+synt match site /\v[a-zA-Z]{4}/ contained nextgroup=function
+exe s:h . "site" . s:keyword2
+
+synt match function /\v[a-zA-Z]{2}/ contained nextgroup=role,ID
+exe s:h . 'function' . s:keyword3
+
+synt match role /\v[a-zA-Z]{4}/ contained nextgroup=ID
+exe s:h . "role" . s:keyword4
+
+synt match ID /\v[0-9]{2}/ contained
+
+"}}}
+
 " log messages {{{
 
-syntax match timestamp excludenl / \d\d:\d\d:\d\d[ .]/ skipwhite nextgroup=subseconds
+syntax match timestamp excludenl / \d\d:\d\d:\d\d[ .]/ skipwhite contained nextgroup=subseconds
 exe s:h . "timestamp" . s:parameter2
 
 syntax match subseconds excludenl /\.\d\+/ contained skipwhite 
@@ -2282,7 +2269,7 @@ exe s:h . "year" . s:italic . s:keyword1
 syntax region logtimestamp excludenl start=/\v^[0-9]{4} [A-Z][a-z]{2} [0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ end=/ /re=e-9,he=e-1 transparent excludenl contains=timestamp,subseconds,month,year
 
 syntax match ciscoerror excludenl /%[^ ]\{-}:/ skipwhite excludenl
-exe s:h . "ciscoerror" . s:bold . s:fgred
+exe s:h . "ciscoerror" . s:emphasis
 
 "syntax region message excludenl start=/\s \d\d/ end=/.\$/ contains=devicedaystamp,ciscoerror
 "exe s:h . "region" . s:fgorange
@@ -2300,6 +2287,7 @@ exe s:h . "ciscoerror" . s:bold . s:fgred
 "exe s:h . "match" . s:fgorange
 
 "}}}
+
 " Prompts {{{
 "syn match config_prompt /^[^ ]\{-1,63}([a-zA-Z\-]*)#/ contained
 "exe s:h . "config_prompt" . s:fgwhite . s:bgbrown
@@ -2325,10 +2313,9 @@ synt match hash_prompt excludenl  /^[^ ]\{-1,63}\#/ excludenl
 exe s:h . "hash_prompt" . s:fgwhite . s:bgbluegreen
 "hi hash_prompt cterm=none ctermfg=white ctermbg=darkblue gui=bold guifg=white guibg=brown
 "
-synt region config_prompt_reg keepend start=/^[a-zA-Z0-9]\{-1,63}([a-zA-Z\-]\+)/re=e end=/#/me=e-1 transparent contains=config_prompt_hostname,config_word,config_mode,config_prompt_end
+synt region config_prompt_reg keepend start=/^[a-zA-Z0-9]\{-1,63}([a-zA-Z\-]\+)/re=e end=/#/me=e-1 excludenl contains=config_prompt_hostname,config_word,config_mode,config_prompt_end
 
 
 "}}}
-
 let b:current_syntax = "cisco"
 
