@@ -744,9 +744,6 @@ exe s:h . "permit_statement" . s:fggreen
 synt match deny_statement /deny/
 exe s:h . "deny_statement" . s:fgred 
 
-synt match match_any_keyword /match-any / nextgroup=match_any_text
-exe s:h . "match_any_keyword" . s:parameter4
-
 synt match match_any_text /[^ ]\+ */ contained
 exe s:h . "match_any_text" . s:parameter2 
 
@@ -856,7 +853,6 @@ exe s:h . "routemap_match_WORD" . s:parameter2
 
 synt match routemap_match_kw1 /address/                skipwhite contained containedin=routemap_match_region
 synt match routemap_match_kw1 /access-group/           skipwhite contained containedin=routemap_match_region
-synt match routemap_match_kw1 /name/                   skipwhite contained containedin=routemap_match_region nextgroup=routemap_match_WORD
 synt match routemap_match_kw1 /next-hop/               skipwhite contained containedin=routemap_match_region
 synt match routemap_match_kw1 /route-source/           skipwhite contained containedin=routemap_match_region
 synt match routemap_match_kw1 /prefix-list/            skipwhite contained containedin=routemap_match_region
@@ -893,12 +889,51 @@ synt match routemap_match_kw1 /policy-list/            skipwhite contained conta
 synt match routemap_match_kw1 /route-type/             skipwhite contained containedin=routemap_match_region
 synt match routemap_match_kw1 /source-protocol/        skipwhite contained containedin=routemap_match_region
 synt match routemap_match_kw1 /tag /                   skipwhite contained containedin=routemap_match_region
-exe s:h . "routemap_match_kw1" . s:keyword1
+synt match routemap_match_kw1 /exception/              skipwhite contained containedin=routemap_match_region
+synt match routemap_match_kw1 /protocol/               skipwhite contained containedin=routemap_match_region
+exe s:h . "routemap_match_kw1" . s:keyword2
 
-synt match routemap_match_kw /match / contained
+synt match routemap_match_kw2 /name /                  skipwhite contained containedin=routemap_match_region nextgroup=parameter2
+synt match routemap_match_kw2 /ip /                    skipwhite contained containedin=routemap_match_region nextgroup=parameter2
+synt match routemap_match_kw2 /ipv6 /                  skipwhite contained containedin=routemap_match_region nextgroup=parameter2
+synt match routemap_match_kw2 /mpls /                  skipwhite contained containedin=routemap_match_region nextgroup=parameter2
+exe s:h . "routemap_match_kw2" . s:keyword3
+
+synt match routemap_match_kw /match / skipwhite contained
 exe s:h . "routemap_match_kw" . s:keyword1
 
-synt region routemap_match_region matchgroup=routemap_match_kw start=/[ ]*[ ]\+match / end=/$/ transparent contains=routemap_match_kw1
+synt match routemap_match_WORD /.*$/ contained
+exe s:h . "routemap_match_WORD" . s:parameter2
+
+synt region routemap_match_region matchgroup=routemap_match_kw start=/[ ]*[ ]\+match / end=/$/ transparent contains=routemap_match_kw,routemap_match_kw1,routemap_match_kw2
+
+synt match classmap_kw1 /type /                         skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /COS[1-4]V\+ /                  skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /SCADA /                        skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /VOIP /                         skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /conform-color-in /             skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /conform-color-out /            skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /exceed-color-in /              skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /exceed-color-out /             skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /copp-system-class-monitoring / skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /match-all /                    skipwhite contained nextgroup=classmap_kw2
+synt match classmap_kw1 /match-any /                    skipwhite contained nextgroup=classmap_kw2
+exe s:h . "classmap_kw1" . s:keyword2 . s:underline
+
+synt match classmap_kw2 /control-plane /    skipwhite contained nextgroup=classmap_kw3
+synt match classmap_kw2 /network-qos /      skipwhite contained nextgroup=classmap_kw3
+synt match classmap_kw2 /qos /              skipwhite contained nextgroup=classmap_kw3
+synt match classmap_kw2 /queuing /          skipwhite contained nextgroup=classmap_kw3
+exe s:h . "classmap_kw2" . s:keyword3 . s:underline
+
+synt match classmap_kw3 /match-any / skipwhite contained nextgroup=parameter3
+synt match classmap_kw3 /match-all / skipwhite contained nextgroup=parameter3
+exe s:h . "classmap_kw3" . s:keyword4 . s:underline
+
+synt match classmap_kw /class-map / skipwhite contained
+exe s:h . "classmap_kw" . s:keyword1 . s:underline
+
+synt region classmap_region matchgroup=classmap_kw start=/^class-map / end=/$/ transparent contains=classmap_kw,classmap_kw1,classmap_kw2,classmap_kw3
 
 "}}}
 " Cisco vrf highlighting {{{
@@ -2233,19 +2268,55 @@ exe s:h . "int_errors" . s:error
 
 " hostnames {{{
 
-synt match state /\v[a-zA-Z]{2}/ contained nextgroup=site
-exe s:h . "state" . s:keyword1
+synt match functional /vns/ contained nextgroup=dcntr,site
+synt match functional /n1k/ contained nextgroup=dcntr,site
+synt match functional /mls/ contained nextgroup=dcntr,site
+synt match functional /cis/ contained nextgroup=dcntr,site
+synt match functional /stk/ contained nextgroup=dcntr,site
+synt match functional /rtr/ contained nextgroup=dcntr,site
+synt match functional /wgs/ contained nextgroup=dcntr,site
+exe s:h . "functional" . s:keyword1
 
-synt match site /\v[a-zA-Z]{4}/ contained nextgroup=function
-exe s:h . "site" . s:keyword2
+synt match dcntr /elr/ contained nextgroup=IDA
+synt match dcntr /ctc/ contained nextgroup=IDA
+synt match dcntr /ply/ contained nextgroup=IDA
+synt match dcntr /ELR/ contained nextgroup=IDA
+synt match dcntr /CTC/ contained nextgroup=IDA
+synt match dcntr /PLY/ contained nextgroup=IDA
+exe s:h . "dcntr" . s:keyword1
 
-synt match function /\v[a-zA-Z]{2}/ contained nextgroup=role,ID
-exe s:h . 'function' . s:keyword3
+synt match site /\v[a-zA-Z]{2}[0-9]{3}/ contained nextgroup=role,designator
+exe s:h . 'site' . s:keyword2
 
-synt match role /\v[a-zA-Z]{4}/ contained nextgroup=ID
-exe s:h . "role" . s:keyword4
+synt match IDA /[0-9]\+/ contained nextgroup=role
+exe s:h . "IDA" . s:fggreen
 
-synt match ID /\v[0-9]{2}/ contained
+synt match role /pri/ contained nextgroup=numbr
+synt match role /ext/ contained nextgroup=numbr
+synt match role /isp/ contained nextgroup=numbr
+synt match role /prd/ contained nextgroup=numbr
+synt match role /vsm/ contained nextgroup=numbr
+synt match role /dis/ contained nextgroup=numbr
+synt match role /csf/ contained nextgroup=numbr
+synt match role /ebr/ contained nextgroup=numbr
+synt match role /dbr/ contained nextgroup=numbr
+synt match role /sto/ contained nextgroup=numbr
+synt match role /aip/ contained nextgroup=numbr
+synt match role /sip/ contained nextgroup=numbr
+synt match role /ccm/ contained nextgroup=numbr
+synt match role /lon/ contained nextgroup=numbr
+synt match role /oob/ contained nextgroup=numbr
+synt match role /leaf/ contained nextgroup=numbr
+synt match role /spine/ contained nextgroup=numbr
+exe s:h . "role" . s:keyword1
+
+synt match designator /\va[0-9]{2}a[0-9]{2}/ contained
+exe s:h . 'designator' . s:keyword3
+
+synt match numbr /[0-9]\+/ contained
+exe s:h . "numbr" . s:fgred
+
+synt region UHC_Hostname start="mls\|cis\|rtr\|stk\|wgs\|n1k\|vns" end=" " excludenl transparent contains=functional
 
 "}}}
 
