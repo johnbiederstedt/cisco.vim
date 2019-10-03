@@ -381,6 +381,9 @@ let s:keyword7 = s:fgkeyword7   " blue
 let s:emphasis = s:fgred . s:bgemph
 let s:error = s:bold . s:fgwhite . s:bgred
 
+synt match description /.\+$/ transparent skipwhite contained
+exe s:h . "description" . s:description
+
 synt match parameter1 /[^ ]\+/ skipwhite contained
 exe s:h . 'parameter1' . s:parameter1
 
@@ -1000,6 +1003,115 @@ exe s:h . "set_kw" . s:keyword1
 
 synt region policy_class_set_region start=/^[  ][ ]\+set / end=/$/ transparent contains=set_kw,set_kw2
 "}}}
+" snmp-server {{{
+
+synt match snmpserver_kw1 /contact /    skipwhite contained containedin=snmpserver_reg nextgroup=description
+synt match snmpserver_kw1 /location /    skipwhite contained containedin=snmpserver_reg nextgroup=description
+synt match snmpserver_kw1 /aaa-user /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw1 /packetsize /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw1 /protocol /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw1 /tcp-session /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw1 /source-interface /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw1 /user /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw1 /host /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw1 /enable /    skipwhite contained containedin=snmpserver_reg
+exe s:h . "snmpserver_kw1" . s:keyword2
+
+synt match snmpserver_kw2 /network-admin /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw2 /network-operator /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw2 /traps /    skipwhite contained containedin=snmpserver_reg nextgroup=description
+synt match snmpserver_kw2 /cache-timeout /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw2 /informs /    skipwhite contained containedin=snmpserver_reg nextgroup=description
+synt match snmpserver_kw2 /use-ipv4acl /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw2 /use-ipv6acl /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw2 /use-vrf /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+exe s:h . "snmpserver_kw2" . s:keyword3
+
+synt match snmpserver_kw3 /auth /    skipwhite contained containedin=snmpserver_reg
+synt match snmpserver_kw3 /priv /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+exe s:h . "snmpserver_kw3" . s:keyword4
+
+synt match snmpserver_kw4 /md5 /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+synt match snmpserver_kw4 /sha /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+synt match snmpserver_kw4 /md5 /    skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+exe s:h . "snmpserver_kw4" . s:keyword5
+
+synt match snmpserver_kw5 /version / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /ospf / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /link / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /entity / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /callhome / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /license / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /hsrp / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /upgrade / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /cfs / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /rf / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /feature-control / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /rmon / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /sysmgr / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /config / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /snmp / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /mpls / skipwhite contained containedin=snmpserver_reg nextgroup=snmpserver_kw6
+synt match snmpserver_kw5 /vtp / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /bridge / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /stpx / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /system / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /generic / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /mmode / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /pim / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /lldp / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /bfd / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /switchfabric / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+synt match snmpserver_kw5 /syslog / skipwhite contained containedin=snmpserver_reg nextgroup=parameter
+exe s:h . "snmpserver_kw5" . s:keyword6
+
+synt match snmpserver_kw6 /ldp / skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+synt match snmpserver_kw6 /traffic-eng / skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+synt match snmpserver_kw6 /fast-route / skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+synt match snmpserver_kw6 /vpn / skipwhite contained containedin=snmpserver_reg nextgroup=parameter2
+exe s:h . "snmpserver_kw6" . s:keyword7
+
+synt match snmpserver_kw /snmp-server / skipwhite contained containedin=snmpserver_reg
+exe s:h . "snmpserver_kw" . s:keyword1
+
+synt region snmpserver_reg matchgroup=snmpserver_kw start=/snmp-server / end=/$/ transparent
+" }}}
+" aaa {{{
+
+synt match aaa_kw /aaa / skipwhite contained containedin=aaa
+exe s:h . "aaa_kw" . s:bold . s:keyword1
+
+synt match aaa_kw2 /authentication / skipwhite contained containedin=aaa
+synt match aaa_kw2 /authorization / skipwhite contained containedin=aaa
+synt match aaa_kw2 /accounting / skipwhite contained containedin=aaa
+exe s:h . "aaa_kw2" . s:keyword2
+
+synt match aaa_kw3 /login / skipwhite contained containedin=aaa
+synt match aaa_kw3 /ssh-publickey / skipwhite contained containedin=aaa
+synt match aaa_kw3 /ssh-certificate / skipwhite contained containedin=aaa
+synt match aaa_kw3 /config-commands / skipwhite contained containedin=aaa
+synt match aaa_kw3 /commands / skipwhite contained containedin=aaa
+synt match aaa_kw3 /user / skipwhite contained containedin=aaa nextgroup=parameter
+exe s:h . "aaa_kw3" . s:keyword3
+
+synt match aaa_kw4 /group / skipwhite contained containedin=aaa nextgroup=parameter4
+synt match aaa_kw4 /local / skipwhite contained containedin=aaa
+synt match aaa_kw4 /console / skipwhite contained containedin=aaa
+synt match aaa_kw4 /error-enable / skipwhite contained containedin=aaa
+synt match aaa_kw4 /mschap / skipwhite contained containedin=aaa nextgroup=parameter
+synt match aaa_kw4 /mschapv2 / skipwhite contained containedin=aaa nextgroup=parameter
+synt match aaa_kw4 /chap / skipwhite contained containedin=aaa nextgroup=parameter
+synt match aaa_kw4 /ascii-authentication / skipwhite contained containedin=aaa
+exe s:h . "aaa_kw4" . s:keyword3
+
+synt match aaa_kw5 /fallback / skipwhite contained containedin=aaa
+exe s:h . "aaa_kw5" . s:keyword5
+
+synt match aaa_kw6 /error / skipwhite contained containedin=aaa nextgroup=parameter
+exe s:h . "aaa_kw6" . s:keyword6
+
+synt region aaa matchgroup=aaa_kw start=/aaa / end=/$/ transparent
+" }}}
 " access-list highlighting {{{
 
 synt match ip_access_list_kw /ip / skipwhite contained containedin=ip_access_list
