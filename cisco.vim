@@ -429,6 +429,17 @@ synt match parameter4 /[^ ]\+/ contained
 exe s:h . "parameter4" . s:parameter4
 synt match parameter5 /[^ ]\+/ contained
 exe s:h . "parameter5" . s:parameter5
+" underlined parameter groups
+synt match parameter_underlined /[^ ]\+/ contained
+exe s:h . "parameter_underlined" . s:parameter1 . s:underline
+synt match parameter2_underlined /[^ ]\+/ contained
+exe s:h . "parameter2_underlined" . s:parameter2 . s:underline
+synt match parameter3_underlined /[^ ]\+/ contained
+exe s:h . "parameter3_underlined" . s:parameter3 . s:underline
+synt match parameter4_underlined /[^ ]\+/ contained
+exe s:h . "parameter4_underlined" . s:parameter4 . s:underline
+synt match parameter5_underlined /[^ ]\+/ contained
+exe s:h . "parameter5_underlined" . s:parameter5 . s:underline
 " }}}
 " other show interface info of interest {{{
 synt match channel_members /Members in this channel:/ 
@@ -926,8 +937,8 @@ synt match classmap_kw2 /qos /              skipwhite contained nextgroup=classm
 synt match classmap_kw2 /queuing /          skipwhite contained nextgroup=classmap_kw3
 exe s:h . "classmap_kw2" . s:keyword3 . s:underline
 
-synt match classmap_kw3 /match-any / skipwhite contained nextgroup=parameter3
-synt match classmap_kw3 /match-all / skipwhite contained nextgroup=parameter3
+synt match classmap_kw3 /match-any / skipwhite contained nextgroup=parameter3_underlined
+synt match classmap_kw3 /match-all / skipwhite contained nextgroup=parameter3_underlined
 exe s:h . "classmap_kw3" . s:keyword4 . s:underline
 
 synt match classmap_kw /class-map / skipwhite contained
@@ -935,7 +946,76 @@ exe s:h . "classmap_kw" . s:keyword1 . s:underline
 
 synt region classmap_region matchgroup=classmap_kw start=/^class-map / end=/$/ transparent contains=classmap_kw,classmap_kw1,classmap_kw2,classmap_kw3
 
+
+synt match policymap_kw1 /type / skipwhite contained nextgroup=policymap_kw2
+exe s:h . "policymap_kw1" . s:keyword2 . s:underline
+
+synt match policymap_kw2 /control-plane /   skipwhite contained nextgroup=parameter3_underlined
+synt match policymap_kw2 /network-qos /     skipwhite contained nextgroup=parameter3_underlined
+synt match policymap_kw2 /qos /             skipwhite contained nextgroup=parameter3_underlined
+synt match policymap_kw2 /queuing /         skipwhite contained nextgroup=parameter3_underlined
+exe s:h . "policymap_kw2" s:keyword3 . s:underline
+
+synt match policymap_kw /policy-map / skipwhite contained
+exe s:h . "policymap_kw" . s:keyword1 . s:underline
+
+synt region policymap_region matchgroup=policymap_kw start=/^policy-map / end=/$/ transparent contains=policymap_kw,policymap_kw1,policymap_kw2,policymap_kw3
+
+synt match class_kw /class / skipwhite contained nextgroup=parameter4
+exe s:h . "class_kw" . s:keyword1
+
+synt region class_region start=/^[ ][ ]\+class / end=/$/ transparent contains=class_kw
+
+
+synt match police_kw /police / skipwhite contained
+exe s:h . "police_kw" . s:keyword1
+
+synt match police_kw1 /cir / skipwhite contained nextgroup=parameter
+exe s:h . "police_kw1" . s:keyword2
+
+synt match police_kw2 /kbps / skipwhite contained
+synt match police_kw2 /ms / skipwhite contained
+synt match police_kw2 /bc /   skipwhite contained nextgroup=parameter
+exe s:h . "police_kw2" . s:keyword3
+
+synt match police_kw3 /conform / skipwhite contained
+exe s:h . "police_kw3" . s:keyword4
+
+synt match police_kw4 /transmit / skipwhite contained
+exe s:h . "police_kw4" . s:keyword5
+
+synt match police_kw5 /violate / skipwhite contained nextgroup=parameter5
+exe s:h . "police_kw5" . s:keyword6
+
+synt match police_kw /police / skipwhite contained
+exe s:h . "police_kw" . s:keyword1
+
+synt region police_region start=/^[  ][ ]\+police / end=/$/ transparent contains=police_kw,police_kw1,police_kw2,police_kw3,police_kw4,police_kw5
+
+synt match set_kw2 /cos / skipwhite contained nextgroup=parameter3
+exe s:h . "set_kw2" . s:keyword2
+
+synt match set_kw /set / skipwhite contained
+exe s:h . "set_kw" . s:keyword1
+
+synt region policy_class_set_region start=/^[  ][ ]\+set / end=/$/ transparent contains=set_kw,set_kw2
 "}}}
+" access-list highlighting {{{
+
+synt match ip_access_list_kw /ip / skipwhite contained containedin=ip_access_list
+synt match ip_access_list_kw /mac / skipwhite contained containedin=mac_access_list nextgroup=mac_access_list_kw2
+synt match ip_access_list_kw /ipv6 / skipwhite contained containedin=ip_access_list
+exe s:h . "ip_access_list_kw" s:keyword1 . s:underline
+
+synt match ip_access_list_kw2 /access-list / skipwhite contained nextgroup=parameter2_underlined
+exe s:h . "ip_access_list_kw2" s:keyword2 . s:underline
+
+synt match mac_access_list_kw2 /access-list / skipwhite contained nextgroup=parameter4_underlined
+exe s:h . "mac_access_list_kw2" s:keyword2 . s:underline
+
+synt region ip_access_list start=/^ip[v6]* access-list / end=/$/ transparent contains=ip_access_list_kw,ip_access_list_kw2
+synt region mac_access_list start=/^mac access-list / end=/$/ transparent contains=ip_access_list_kw,ip_access_list_kw2
+" }}}
 " Cisco vrf highlighting {{{
 synt match vrf_kw /vrf/ contained containedin=vrf_region nextgroup=vrf_keyword skipwhite
 exe s:h . "vrf_kw" . s:keyword1
