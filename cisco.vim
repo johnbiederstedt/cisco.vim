@@ -920,7 +920,8 @@ synt match routemap_match_WORD /.*$/ contained
 exe s:h . "routemap_match_WORD" . s:parameter2
 
 synt region routemap_match_region matchgroup=routemap_match_kw start=/[ ]*[ ]\+match / end=/$/ transparent contains=routemap_match_kw,routemap_match_kw1,routemap_match_kw2
-
+"}}}
+" class-map highlighting {{{
 synt match classmap_kw1 /type /                         skipwhite contained nextgroup=classmap_kw2
 synt match classmap_kw1 /COS[1-4]V\+ /                  skipwhite contained nextgroup=classmap_kw2
 synt match classmap_kw1 /SCADA /                        skipwhite contained nextgroup=classmap_kw2
@@ -948,8 +949,9 @@ synt match classmap_kw /class-map / skipwhite contained
 exe s:h . "classmap_kw" . s:keyword1 . s:underline
 
 synt region classmap_region matchgroup=classmap_kw start=/^class-map / end=/$/ transparent contains=classmap_kw,classmap_kw1,classmap_kw2,classmap_kw3
+" }}}
 
-
+" policy-map highlighting {{{
 synt match policymap_kw1 /type / skipwhite contained nextgroup=policymap_kw2
 exe s:h . "policymap_kw1" . s:keyword2 . s:underline
 
@@ -982,12 +984,14 @@ synt match police_kw2 /bc /   skipwhite contained nextgroup=parameter
 exe s:h . "police_kw2" . s:keyword3
 
 synt match police_kw3 /conform / skipwhite contained
+synt match police_kw3 /conform-action / skipwhite contained
 exe s:h . "police_kw3" . s:keyword4
 
 synt match police_kw4 /transmit / skipwhite contained
 exe s:h . "police_kw4" . s:keyword5
 
 synt match police_kw5 /violate / skipwhite contained nextgroup=parameter5
+synt match police_kw5 /exceed-action / skipwhite contained nextgroup=parameter5
 exe s:h . "police_kw5" . s:keyword6
 
 synt match police_kw /police / skipwhite contained
