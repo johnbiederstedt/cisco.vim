@@ -434,15 +434,15 @@ synt match parameter5 /[^ ]\+/ contained
 exe s:h . "parameter5" . s:parameter5
 " underlined parameter groups
 synt match parameter_underlined /[^ ]\+/ contained
-exe s:h . "parameter_underlined" . s:parameter1 . s:underline
+exe s:h . "parameter_underlined" . s:ul_bold . s:fgparameter
 synt match parameter2_underlined /[^ ]\+/ contained
-exe s:h . "parameter2_underlined" . s:parameter2 . s:underline
+exe s:h . "parameter2_underlined" . s:ul_bold . s:fgparameter2
 synt match parameter3_underlined /[^ ]\+/ contained
-exe s:h . "parameter3_underlined" . s:parameter3 . s:underline
+exe s:h . "parameter3_underlined" . s:ul_bold . s:fgparameter3
 synt match parameter4_underlined /[^ ]\+/ contained
-exe s:h . "parameter4_underlined" . s:parameter4 . s:underline
+exe s:h . "parameter4_underlined" . s:ul_bold . s:fgparameter4
 synt match parameter5_underlined /[^ ]\+/ contained
-exe s:h . "parameter5_underlined" . s:parameter5 . s:underline
+exe s:h . "parameter5_underlined" . s:ul_bold . s:fgparameter5
 " }}}
 " other show interface info of interest {{{
 synt match channel_members /Members in this channel:/ 
@@ -1005,7 +1005,57 @@ exe s:h . "set_kw2" . s:keyword2
 synt match set_kw /set / skipwhite contained
 exe s:h . "set_kw" . s:keyword1
 
-synt region policy_class_set_region start=/^[  ][ ]\+set / end=/$/ transparent contains=set_kw,set_kw2
+synt region policy_class_set_region start=/^[  ][ ]\+set / end=// transparent contains=set_kw,set_kw2
+"}}}
+" BGP stanzas {{{
+
+synt match bgp_kw1 /send-community / skipwhite contained nextgroup=parameter
+synt match bgp_kw1 /route-map / skipwhite contained nextgroup=parameter
+synt match bgp_kw1 /route-reflector-client/ skipwhite contained 
+synt match bgp_kw1 /bfd/ skipwhite contained 
+synt match bgp_kw1 /template / skipwhite contained nextgroup=bgp_kw2
+synt match bgp_kw1 /neighbor/ skipwhite contained nextgroup=bgp_kw2
+synt match bgp_kw1 /remote-as / skipwhite contained nextgroup=parameter
+synt match bgp_kw1 /password / skipwhite contained nextgroup=parameter
+synt match bgp_kw1 /log-neighbor-changes/ skipwhite contained 
+synt match bgp_kw1 /inherit / skipwhite contained nextgroup=bgp_kw2
+synt match bgp_kw1 /update-source / skipwhite contained
+synt match bgp_kw1 /redistribute / skipwhite contained
+exe s:h . 'bgp_kw1' . s:keyword2
+
+synt match bgp_kw2 /extended/ skipwhite contained 
+synt match bgp_kw2 /network / skipwhite contained nextgroup=ipaddr
+synt match bgp_kw2 /aggregate-address / skipwhite contained nextgroup=ipaddr
+synt match bgp_kw2 /direct/ skipwhite contained 
+synt match bgp_kw2 / table-map / skipwhite contained nextgroup=parameter
+synt match bgp_kw2 /default-information/ skipwhite contained 
+synt match bgp_kw2 /ospf / skipwhite contained nextgroup=parameter
+synt match bgp_kw2 /peer-policy / skipwhite contained nextgroup=parameter4
+synt match bgp_kw2 /peer-session / skipwhite contained nextgroup=parameter4
+exe s:h . 'bgp_kw2' . s:keyword3
+
+synt match bgp_kw3 /route-map / skipwhite contained nextgroup=parameter
+synt match bgp_kw3 /originate / skipwhite contained 
+exe s:h . 'bgp_kw3' . s:keyword4
+
+synt match bgp_stanza_kw /template / skipwhite contained nextgroup=bgp_template_line_kw2
+synt match bgp_stanza_kw /neighbor / skipwhite contained nextgroup=ipaddress_underlined
+synt match bgp_stanza_kw /vrf / skipwhite contained nextgroup=parameter5_underlined
+exe s:h . 'bgp_stanza_kw' . s:fgkeyword . s:ul_bold
+
+synt match ipaddress_underlined /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2}) / skipwhite contained nextgroup=remote_as_kw
+exe s:h . "ipaddress_underlined" . s:ul_bold . s:fgpink
+
+synt match remote_as_kw /remote-as / contained skipwhite nextgroup=parameter_underlined
+exe s:h . "remote_as_kw" . s:keyword2 . s:underline
+
+synt match bgp_template_line_kw2 /peer-policy / skipwhite contained nextgroup=parameter4_underlined
+synt match bgp_template_line_kw2 /peer-session / skipwhite contained nextgroup=parameter4_underlined
+exe s:h . 'bgp_template_line_kw2' . s:ul_bold . s:keyword3
+
+synt region bgp_template_reg start="^  template" end="^  [a-zA-Z0-9]" transparent contains=address_family_region,bgp_kw1,bgp_kw2,ciscointregion,bgp_stanza_kw
+synt region bgp_neighbor_reg start="^  neighbor" end="^  [a-zA-Z0-9]" transparent contains=address_family_region,bgp_kw1,bgp_kw2,ciscointregion,bgp_stanza_kw,ipaddress_underlined,remote_as_kw
+synt region bgp_vrf_reg start="^  vrf" end="^  [a-zA-Z0-9]" transparent contains=address_family_region,bgp_kw1,bgp_kw2,bgp_kw3,ipaddress
 "}}}
 " snmp-server {{{
 
@@ -1644,18 +1694,19 @@ synt region router_mode_region start=/^router / end=/$/ keepend excludenl skipwh
 "}}}
 " address-family {{{
 
-synt match address_family_kw /address\-family/ contained containedin=address_family_region skipwhite nextgroup=ip_version
+synt match address_family_kw /address-family/ skipwhite contained containedin=address_family_region,bgp_template_reg skipwhite nextgroup=ip_version
 exe s:h . 'address_family_kw' . s:keyword1
 
-synt match ip_version /ipv4/     skipwhite contained nextgroup=address_family_kw3
-synt match ip_version /ipv6/     skipwhite contained nextgroup=address_family_kw3
+synt match ip_version /ipv4/     skipwhite contained containedin=address_family_region nextgroup=address_family_kw3
+synt match ip_version /ipv6/     skipwhite contained containedin=address_family_region nextgroup=address_family_kw3
+synt match ip_version /vpnv4/    skipwhite contained containedin=address_family_region nextgroup=address_family_kw3
 exe s:h . "ip_version" . s:keyword2
 
-synt match address_family_kw3 /vrf/      skipwhite contained nextgroup=vrf_name
-synt match address_family_kw3 /unicast/  skipwhite contained nextgroup=af_vrf_kw
+synt match address_family_kw3 /vrf/      skipwhite contained containedin=address_family_region nextgroup=vrf_name
+synt match address_family_kw3 /unicast/  skipwhite contained containedin=address_family_region nextgroup=af_vrf_kw
 exe s:h . "address_family_kw3" . s:keyword3
 
-synt match af_vrf_kw /vrf/   skipwhite contained nextgroup=vrf_name
+synt match af_vrf_kw /vrf/   skipwhite contained containedin=address_family_region nextgroup=vrf_name
 exe s:h . "af_vrf_kw" . s:keyword4 
 
 synt region address_family_region start=/ address\-family/ end=/$/ transparent keepend excludenl
@@ -1663,7 +1714,7 @@ synt region address_family_region start=/ address\-family/ end=/$/ transparent k
 synt match exit_address_family /exit\-address\-family/ skipwhite
 exe s:h . "exit_address_family" . s:fggray 
 " }}}
-"distribute-list {{{
+" distribute-list {{{
 
 synt match dl_kw /distribute\-list/  skipwhite contained containedin=distribute_list_region nextgroup=dl_kw2
 exe s:h . "dl_kw" . s:keyword1
@@ -1870,12 +1921,12 @@ exe s:h . "ipaddr_otherkw_param" . s:fgorange
 synt match ipaddr_other_keywords "prefix-lists:" nextgroup=ipaddr_otherkw_param skipwhite containedin=ipaddr_region
 exe s:h . "ipaddr_other_keywords" . s:bold . s:keyword2
 
-synt match ipaddr_cidr contained excludenl   /\v[/]\d{1,3}/
+synt match ipaddr_cidr /\v[/]\d{1,3}/ contained
 exe s:h . "ipaddr_cidr" . s:italic . s:keyword1
 
 " an IP address that follows another IP address
-synt match ipaddr excludenl /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask,wildcard
-synt match ipaddr excludenl /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/
+synt match ipaddr /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask,wildcard
+"synt match ipaddr /\v(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/
 exe s:h . "ipaddr" . s:fgpink . s:bold_italic
 
 "syn region ipaddr_subnetmask_in_ipaddr matchgroup=subnetmask start=/\v(0|192|224|240|248|252|254|255)\.(0|128|192|240|224|248|252|254|255)\.(0|128|192|224|240|248|252|254|255)\.(0|128|192|224|240|248|252|254|255)/ end=/$/ keepend skipwhite transparent excludenl contains=subnetmask contained
