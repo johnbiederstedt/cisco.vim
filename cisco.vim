@@ -815,7 +815,6 @@ exe s:h . "Console_Error" . s:emphasis
 
 
 "}}}
-
 " Key chain {{{
 synt match key_KW /^key/ skipwhite nextgroup=key_chain_KW
 exe s:h . 'key_KW' . s:keyword1
@@ -830,7 +829,6 @@ synt match key_mode_keystring_KW / \+key-string/ skipwhite nextgroup=parameter2
 exe s:h . 'key_mode_keystring_KW' . s:keyword4
 
 "}}}
-
 " show vlan region {{{
 "syntax match vlannumber /^[0-9]\{1,4}/ contained nextgroup=vlanname
 "HiLink    vlannumber       Keyword
@@ -846,7 +844,6 @@ synt match MTU_parameter excludenl /[0-9]\{3,4}/ contained containedin=MTU_kw
 exe s:h . "MTU_parameter" . s:parameter1
 
 "}}}
-
 " Interface Description and comment highlighting {{{
 
 synt match ciscodescription excludenl /[dD]escription[:]\{0,1}/ nextgroup=ciscodescriptiontext skipwhite
@@ -1202,20 +1199,8 @@ exe s:h . "vrf_route_table_listing" s:keyword2
 
 "}}}
 " switchport command {{{
-" This is a good example of why cisco highlighting can't really be done well
-" in the context of highlighting a conventional programming language.  One
-" could simply re-use keyword, preproc, repeat, and so forth, but it's more
-" straightforward to just say "purple", blue, green, and so forth.  That said,
-" the highlighting variable "s:keyword" is used in places, but not to the
-" extent of "s:keyword,2,3,4" and so on.  That's one approach that would
-" make it easier to have custom color schemes, but that also doesn't fit the
-" paradigm of highlighting a conventional programming language.
-"
-" TODO  make these local to each subgroup, even at the expense of defining
-"       the same pattern with different names
-
-"syn match switchport_kw_err excludenl /\v[^ ]+/ contained 
-"exe s:h . "switchport_kw_err" . s:rev . s:fgred
+syn match switchport_kw_err excludenl /\v[^ ]+/ contained 
+exe s:h . "switchport_kw_err" . s:rev . s:fgred
 
 synt match encapsulation_tag /\v[0-9]{1,4}/    skipwhite contained
 synt match encapsulation_tag /ethertype/       skipwhite contained
@@ -1736,21 +1721,19 @@ synt region distribute_list_region start=/distribute\-list/ end=/$/ transparent 
 "}}}
 " ip route {{{
 " first the global IP command for a few
-synt region ip_rt start=/ip route/ end=/$/ keepend transparent 
+synt region ip_rt start=/^ip route\|#ip route/ end=/$/ keepend transparent excludenl
 
 synt match ip_KW /ip/ skipwhite contained containedin=ip_rt
 exe s:h . 'ip_KW' . s:keyword1
 
-synt match ip_route / route/ skipwhite contained containedin=ip_rt nextgroup=ip_route_vrf,ipaddress,subnetmask,wildcard
+synt match ip_route / route/ skipwhite contained containedin=ip_rt nextgroup=ip_route_vrf,ipaddress
 exe s:h . "ip_route" . s:keyword2
 
 synt match ip_route_vrf /vrf/ skipwhite contained containedin=ip_route nextgroup=ip_route_vrf_name skipwhite
 exe s:h . "ip_route_vrf" . s:bold . s:fgred
 
-synt match ip_route_vrf_name / [^ ]\+/ms=s+1 contained containedin=ip_route_vrf skipwhite
+synt match ip_route_vrf_name / [^ ]\+/ms=s+1 contained containedin=ip_route_vrf nextgroup=ipaddress skipwhite
 exe s:h . "ip_route_vrf_name" . s:none . s:parameter1
-
-synt cluster follows_ip_route contains=ipaddr,ip_route_vrf
 
 synt match route_name_kw /name / skipwhite contained containedin=ip_rt nextgroup=route_name_text
 exe s:h . "route_name_kw" . s:fgbrown
@@ -1868,7 +1851,7 @@ exe s:h . "zeros" . s:bold . s:fgpink
 "syn match ipaddress /(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)/
 
 
-synt match ipaddress excludenl /\v\s(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite 
+synt match ipaddress excludenl /\v\s(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask skipwhite 
 exe s:h . "ipaddress" . s:fgpink
 
 
