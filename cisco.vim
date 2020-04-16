@@ -2,12 +2,12 @@
 " Vim syntax file
 " Language: cisco configuration files
 " Version: .627
-" 
+"
 " Inception: 29-jan-2006
 " Inspiration:  Harry Schroeder's original cisco vim syntax file, and a discussion
 "               on reddit.com in the vim subreddit on highlighting ip addresses in
 "               a syntax file in 2005.  Grown from there.
-" Notes:    
+" Notes:
 "           This does not follow the conventional notion in vim of separate
 "           language and color definition files.  That's because cisco
 "           configuration syntax, in spite of the misnomer 'code' used when
@@ -38,8 +38,8 @@
 "           out into color theme and syntax definition files.
 "
 "
-"           While there are a large collection of keywords as in Schroeder's work, 
-"           a smaller set was chosen and highlighting changed so later keywords 
+"           While there are a large collection of keywords as in Schroeder's work,
+"           a smaller set was chosen and highlighting changed so later keywords
 "           in a config line would receive different highlighting.
 "
 "
@@ -53,7 +53,7 @@
 "
 "           Used with ConqueTerm running bash there is an undesireable side
 "           effect when connecting to cisco nexus equipment, when a backspace
-"           will 'blank' a line.  
+"           will 'blank' a line.
 "           To get around this:
 "           :ConqueTerm screen -c ~/.screenrcnull
 "
@@ -214,7 +214,7 @@ else " assume terminal mode
             let s:white         =   "255"
             let s:gray          =   "246"
             let s:black         =   "238"
-            let s:param         =   "7"  
+            let s:param         =   "7"
             let s:red           =   "196"
             let s:orange        =   "208"
             let s:brown         =   "136"
@@ -256,7 +256,7 @@ else " assume terminal mode
             let s:white         =   "15"
             let s:gray          =   "8"
             let s:black         =   "8"
-            let s:param         =   "15"  
+            let s:param         =   "15"
             let s:red           =   "9"
             let s:orange        =   "9 term=bold"
             let s:brown         =   "1 term=bold"
@@ -445,10 +445,10 @@ synt match parameter5_underlined /[^ ]\+/ contained
 exe s:h . "parameter5_underlined" . s:ul_bold . s:fgparameter5
 " }}}
 " other show interface info of interest {{{
-synt match channel_members /Members in this channel:/ 
+synt match channel_members /Members in this channel:/
 exe s:h . " channel_members " . s:fgmagenta
 
-synt match half_duplex /[Hh]alf-duplex/ 
+synt match half_duplex /[Hh]alf-duplex/
 exe s:h . " half_duplex " . s:fgwhite . s:bgred
 
 synt region media_type excludenl start=/media type is /hs=e+1 end=/$/ excludenl
@@ -457,16 +457,16 @@ exe s:h . " media_type " . s:fgpurple
 synt match output_drops /output drops: [1-9][0-9]*/ excludenl
 exe s:h . " output_drops " . s:bold . s:fgwhite . s:bgred
 
-synt match no_input_output_rate /rate 0 bits\/sec/hs=s+4 
+synt match no_input_output_rate /rate 0 bits\/sec/hs=s+4
 exe s:h . " no_input_output_rate " . s:fgred
 
 synt match tx_rx_load /[rt]xload [0-9]\{1,3}\/[0-9]\{1,3}/ excludenl
 exe s:h . " tx_rx_load " . s:fgblue
 
-synt match jumbos /[1-9][0-9]* jumbo/ 
+synt match jumbos /[1-9][0-9]* jumbo/
 exe s:h . "jumbos" . s:bold . s:bgred
 
-synt match is_down /is down/ 
+synt match is_down /is down/
 exe s:h . " is_down " . s:ul . s:fgred
 
 synt match is_up /is up/
@@ -495,48 +495,48 @@ exe s:h . "SFP_not_inserted" . s:bgyellow . s:fgred
 "}}}
 " Interface names {{{
 " This is the secion where the interface name is highlighted.
-synt match ciscointerfacetype excludenl /[A-Za-z\-]\{2,} \{0,1}/                 nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[vV][Ee]th \{0,1}/                      nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[vV][Ee]thernet \{0,1}/                 nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ee]th \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ee]thernet \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ff]a \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ff]as \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ff]ast[Ee]thernet \{0,1}/              nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Gg]i \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Gg]ig \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Gg]igabit[Ee]thernet \{0,1}/           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]e \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]en \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]en[Gg]i \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]en[Gg]igabit[Ee]thernet \{0,1}/     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Dd]ot11[Rr]adio \{0,1}/                nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ss]er \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ss]erial \{0,1}/                       nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ll]o \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ll]oop \{0,1}/                         nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Ll]oopback \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]un\{0,1} \{0,1}/                    nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Tt]unnel \{0,1}/                       nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Pp][oO][sS]\{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Pp]o \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Pp]ort.\{0,1}[cC]hannel \{0,1}/        nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Vv]l \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Vv]lan \{0,1}/                         nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /[Pp][Vv]lan \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained 
-synt match ciscointerfacetype excludenl /mgmt/                                   nextgroup=ciscointerfacenumber skipwhite contained 
+synt match ciscointerfacetype excludenl /[A-Za-z\-]\{2,} \{0,1}/                 nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[vV][Ee]th \{0,1}/                      nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[vV][Ee]thernet \{0,1}/                 nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ee]th \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ee]thernet \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ff]a \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ff]as \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ff]ast[Ee]thernet \{0,1}/              nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Gg]i \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Gg]ig \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Gg]igabit[Ee]thernet \{0,1}/           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Tt]e \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Tt]en \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Tt]en[Gg]i \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Tt]en[Gg]igabit[Ee]thernet \{0,1}/     nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Dd]ot11[Rr]adio \{0,1}/                nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ss]er \{0,1}/                          nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ss]erial \{0,1}/                       nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ll]o \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ll]oop \{0,1}/                         nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Ll]oopback \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Tt]un\{0,1} \{0,1}/                    nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Tt]unnel \{0,1}/                       nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Pp][oO][sS]\{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Pp]o \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Pp]ort.\{0,1}[cC]hannel \{0,1}/        nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Vv]l \{0,1}/                           nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Vv]lan \{0,1}/                         nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /[Pp][Vv]lan \{0,1}/                     nextgroup=ciscointerfacenumber skipwhite contained
+synt match ciscointerfacetype excludenl /mgmt/                                   nextgroup=ciscointerfacenumber skipwhite contained
 exe s:h . "ciscointerfacetype" . s:ul_bold . s:fgcyan
 
-synt match ciscoNullinterface excludenl /Null0/ 
+synt match ciscoNullinterface excludenl /Null0/
 exe s:h . "ciscoNullinterface" . s:bgemph . s:ul_bold . s:fgred
 
-synt match ciscointerfacenumber excludenl /\d\{1,4}/ contained nextgroup=interfacenumberafterslash skipwhite 
+synt match ciscointerfacenumber excludenl /\d\{1,4}/ contained nextgroup=interfacenumberafterslash skipwhite
 exe s:h . "ciscointerfacenumber" . s:ul_bold . s:fgyellow
 
-synt match interfacenumberafterslash excludenl /\/\d\{1,2}\/\{0,1}\d\{0,2}/ contained nextgroup=ciscosubinterface skipwhite 
+synt match interfacenumberafterslash excludenl /\/\d\{1,2}\/\{0,1}\d\{0,2}/ contained nextgroup=ciscosubinterface skipwhite
 exe s:h . "interfacenumberafterslash"  . s:ul_bold . s:fgyellow
 
-synt match ciscosubinterface excludenl /[:.]\{0,1}\d\{0,4}/ contained 
+synt match ciscosubinterface excludenl /[:.]\{0,1}\d\{0,4}/ contained
 exe s:h . "ciscosubinterface" . s:ul_bold . s:fgorange
 " this section is where the interface name region is detected.  Above is where
 " it is highlighted
@@ -573,14 +573,14 @@ synt match dont_highlight excludenl /\v[a-zA-Z0-9][Gg]i {0,1}\d{-1,2}/me=e-3    
 
 "syn region dont_highlight excludenl start=/\v[a-zA-Z0-9][Tt]e {0,1}\d{-1,2}/                end="[,: ]"re=e-3,he=e-3 contains=nohighlight transparent skipwhite
 "syn region dont_highlight excludenl start=/\v[a-zA-Z0-9][Gg]i {0,1}\d{-1,2}/                end="[,: ]"re=e-2,he=e-2 contains=nohighlight
-"syn match nohighlight /.*/ contained 
+"syn match nohighlight /.*/ contained
 
 "}}}
 " interface line config highlighting region {{{
 
-synt match ciscointerface /^int / contained nextgroup=ciscointerfacetype skipwhite 
-synt match ciscointerface /^interface / contained nextgroup=ciscointerfacetype skipwhite 
-synt match ciscointerface /^Interface:/ contained nextgroup=ciscointerfacetype skipwhite 
+synt match ciscointerface /^int / contained nextgroup=ciscointerfacetype skipwhite
+synt match ciscointerface /^interface / contained nextgroup=ciscointerfacetype skipwhite
+synt match ciscointerface /^Interface:/ contained nextgroup=ciscointerfacetype skipwhite
 exe s:h . "ciscointerface" . s:ul_bold . s:keyword1
 
 synt region interfaceregion  excludenl start="^int[e]\{,1}[r]\{,1}[f]\{,1}[a]\{,1}[c]\{,1}[e]\{,1}" end=".$" transparent keepend contains=ciscointerface
@@ -601,7 +601,7 @@ exe s:h . "vserviceline_kw1" . s:ul . s:keyword2
 synt match vserviceline_type /[^ ]\+$/       contained
 exe s:h . "vserviceline_type" . s:ul_bold . s:fgpurple
 
-synt match vserviceline_path_name /[^ ]\+/   contained 
+synt match vserviceline_path_name /[^ ]\+/   contained
 exe s:h . "vserviceline_path_name" . s:ul . s:fgcyan
 
 synt match vserviceline_node_name /[^ ]\+ /  contained nextgroup=vserviceline_kw1
@@ -625,7 +625,7 @@ synt region vservice_line start=/^  vservice / end=/.$/ excludenl transparent ke
 "}}}
 " Nexus 1000v org line in port profiles {{{
 synt match org_root /^  org root\// nextgroup=org_root_name
-exe s:h . "org_root" . s:keyword1 
+exe s:h . "org_root" . s:keyword1
 
 sy match org_root_name /[^ /]\+/ contained containedin=org_root_slash
 exe s:h . "org_root_name" . s:bold . s:parameter1
@@ -677,28 +677,28 @@ synt region virtual_service_blade_region  start="\v^vi[r]{0,1}[t]{0,1}[u]{0,1}[a
 "}}}
 " show cdp neighbor  {{{
 
-synt match DeviceID_text excludenl /[^ ()]\+/ contained nextgroup=DeviceID_Serial 
+synt match DeviceID_text excludenl /[^ ()]\+/ contained nextgroup=DeviceID_Serial
 exe s:h . "DeviceID_text" . s:ul_bold . s:fgblue
 
-synt match DeviceID_Serial excludenl /(.*)/ contained 
+synt match DeviceID_Serial excludenl /(.*)/ contained
 exe s:h . "DeviceID_Serial" . s:fgorange
 
 synt match DeviceID_kw excludenl /Device ID: \?/ nextgroup=DeviceID_text
 "exe s:h . "DeviceID_kw" . s:fgblue
 
-"syn region DeviceID start="Device ID:" end=".$" contains=DeviceID_kw,DeviceID_Serial,DeviceID_text keepend transparent 
+"syn region DeviceID start="Device ID:" end=".$" contains=DeviceID_kw,DeviceID_Serial,DeviceID_text keepend transparent
 
-synt match SystemName_text excludenl /[^ ]\+/ contained 
+synt match SystemName_text excludenl /[^ ]\+/ contained
 exe s:h . "SystemName_text" . s:fgblue
 
 synt match SystemName_KW excludenl /System Name:/ nextgroup=SystemName_text skipwhite
 "exe s:h . "SystemName_KW" . s:fgblue
 
-"syn region SystemName start="System Name:" end=".$" contains=SystemName_KW,SystemName_text keepend transparent 
+"syn region SystemName start="System Name:" end=".$" contains=SystemName_KW,SystemName_text keepend transparent
 
 "}}}
 " Misc Global Keywords {{{
-" 
+"
 syntax match ciscono / no / skipwhite
 syntax match ciscono /^no / skipwhite
 exe s:h . "ciscono" . s:fgred
@@ -707,7 +707,7 @@ synt match connected /connected/ skipwhite
 exe s:h . "connected" . s:fggreen
 
 synt match default_KW /default/ skipwhite
-exe s:h . 'default_KW' . s:parameter1 
+exe s:h . 'default_KW' . s:parameter1
 
 synt match notconnect /not *connect/
 synt match notconnect /not *connec[t]\{,1}[e]\{,1}[d]\{,1}/
@@ -753,19 +753,19 @@ synt match feature /[^ ]\+ */ contained
 exe s:h . "feature" . s:parameter2
 
 synt match permit_statement /permit/
-exe s:h . "permit_statement" . s:fggreen 
+exe s:h . "permit_statement" . s:fggreen
 
 synt match deny_statement /deny/
-exe s:h . "deny_statement" . s:fgred 
+exe s:h . "deny_statement" . s:fgred
 
 synt match match_any_text /[^ ]\+ */ contained
-exe s:h . "match_any_text" . s:parameter2 
+exe s:h . "match_any_text" . s:parameter2
 
 synt match misc_keywords1 / location/ nextgroup=name_text skipwhite
 synt match misc_keywords1 /contact/ nextgroup=name_text skipwhite
 synt match misc_keywords1 /network/ skipwhite
 synt match misc_keywords1 /autonomous-system/ skipwhite nextgroup=parameter1
-synt match misc_keywords1 /passive-interface/ skipwhite 
+synt match misc_keywords1 /passive-interface/ skipwhite
 synt match misc_keywords1 /load-interval/ skipwhite nextgroup=parameter1
 
 exe s:h . "misc_keywords1" . s:keyword1
@@ -808,7 +808,7 @@ exe s:h . "shutdown" . s:parameter5
 
 synt match no_shutdown / *no shut/
 synt match no_shutdown / *no shutdown/
-exe s:h . "no_shutdown" . s:bold . s:fggreen 
+exe s:h . "no_shutdown" . s:bold . s:fggreen
 
 synt match Console_Error /^%.*/
 exe s:h . "Console_Error" . s:emphasis
@@ -833,7 +833,7 @@ exe s:h . 'key_mode_keystring_KW' . s:keyword4
 "syntax match vlannumber /^[0-9]\{1,4}/ contained nextgroup=vlanname
 "HiLink    vlannumber       Keyword
 "syntax match vlanname /[a-zA-Z]\{1,32}/ contained
-"HiLink    vlanname         Repeat  
+"HiLink    vlanname         Repeat
 "syntax region showvlan start="sh.*vl" end="^[^ ]\{1,63}#" end=/[\r]\{1,63}\#/ contains=vlannumber,ciscointerfacetype,more,ciscointregion,hash_prompt
 "}}}
 " MTU {{{
@@ -853,7 +853,7 @@ synt match ciscodescriptiontext excludenl /.*$/ contained
 exe s:h . "ciscodescriptiontext" . s:description
 
 synt match commenttext excludenl /.*$/ contained
-exe s:h . "commenttext"  . s:italic . s:fggray 
+exe s:h . "commenttext"  . s:italic . s:fggray
 
 synt region comment excludenl start=/\!/ end=/$/ contains=commenttext keepend transparent
 
@@ -1008,31 +1008,31 @@ synt region policy_class_set_region start=/^[  ][ ]\+set / end=// transparent co
 
 synt match bgp_kw1 /send-community / skipwhite contained nextgroup=parameter
 synt match bgp_kw1 /route-map / skipwhite contained nextgroup=parameter
-synt match bgp_kw1 /route-reflector-client/ skipwhite contained 
-synt match bgp_kw1 /bfd/ skipwhite contained 
+synt match bgp_kw1 /route-reflector-client/ skipwhite contained
+synt match bgp_kw1 /bfd/ skipwhite contained
 synt match bgp_kw1 /template / skipwhite contained nextgroup=bgp_kw2
 synt match bgp_kw1 /neighbor/ skipwhite contained nextgroup=bgp_kw2
 synt match bgp_kw1 /remote-as / skipwhite contained nextgroup=parameter
 synt match bgp_kw1 /password / skipwhite contained nextgroup=parameter
-synt match bgp_kw1 /log-neighbor-changes/ skipwhite contained 
+synt match bgp_kw1 /log-neighbor-changes/ skipwhite contained
 synt match bgp_kw1 /inherit / skipwhite contained nextgroup=bgp_kw2
 synt match bgp_kw1 /update-source / skipwhite contained
 synt match bgp_kw1 /redistribute / skipwhite contained
 exe s:h . 'bgp_kw1' . s:keyword2
 
-synt match bgp_kw2 /extended/ skipwhite contained 
+synt match bgp_kw2 /extended/ skipwhite contained
 synt match bgp_kw2 /network / skipwhite contained nextgroup=ipaddr
 synt match bgp_kw2 /aggregate-address / skipwhite contained nextgroup=ipaddr
-synt match bgp_kw2 /direct/ skipwhite contained 
+synt match bgp_kw2 /direct/ skipwhite contained
 synt match bgp_kw2 / table-map / skipwhite contained nextgroup=parameter
-synt match bgp_kw2 /default-information/ skipwhite contained 
+synt match bgp_kw2 /default-information/ skipwhite contained
 synt match bgp_kw2 /ospf / skipwhite contained nextgroup=parameter
 synt match bgp_kw2 /peer-policy / skipwhite contained nextgroup=parameter4
 synt match bgp_kw2 /peer-session / skipwhite contained nextgroup=parameter4
 exe s:h . 'bgp_kw2' . s:keyword3
 
 synt match bgp_kw3 /route-map / skipwhite contained nextgroup=parameter
-synt match bgp_kw3 /originate / skipwhite contained 
+synt match bgp_kw3 /originate / skipwhite contained
 exe s:h . 'bgp_kw3' . s:keyword4
 
 synt match bgp_stanza_kw /template / skipwhite contained nextgroup=bgp_template_line_kw2
@@ -1199,7 +1199,7 @@ exe s:h . "vrf_route_table_listing" s:keyword2
 
 "}}}
 " switchport command {{{
-syn match switchport_kw_err excludenl /\v[^ ]+/ contained 
+syn match switchport_kw_err excludenl /\v[^ ]+/ contained
 exe s:h . "switchport_kw_err" . s:rev . s:fgred
 
 synt match encapsulation_tag /\v[0-9]{1,4}/    skipwhite contained
@@ -1211,21 +1211,21 @@ exe s:h . "switchport_keyword" . s:keyword1
 
 " the base set following the root.
 " TODO  each should get its own subregion
-synt match switchport_base_kwds excludenl /access/         contained 
+synt match switchport_base_kwds excludenl /access/         contained
 synt match switchport_base_kwds excludenl /autostate/      contained skipwhite nextgroup=switchport_autostate_kw,switchport_kw_err
 synt match switchport_base_kwds excludenl /backup/         contained skipwhite nextgroup=switchport_backup_kw,switchport_kw_err
 synt match switchport_base_kwds excludenl /block/          contained skipwhite nextgroup=switchport_block_kw,switchport_kw_err
-synt match switchport_base_kwds excludenl /capture/        contained 
+synt match switchport_base_kwds excludenl /capture/        contained
 synt match switchport_base_kwds excludenl /dot1q /         contained
-synt match switchport_base_kwds excludenl /host/           contained 
+synt match switchport_base_kwds excludenl /host/           contained
 synt match switchport_base_kwds excludenl /mode/           contained skipwhite nextgroup=switchport_mode_kwds
-synt match switchport_base_kwds excludenl /monitor/        contained 
-synt match switchport_base_kwds excludenl /trunk/          contained 
-synt match switchport_base_kwds excludenl /port-security/  contained 
-synt match switchport_base_kwds excludenl /private-vlan/   contained skipwhite nextgroup=switchport_mode_privatevlan_kwds 
-synt match switchport_base_kwds excludenl /block/          contained 
-synt match switchport_base_kwds excludenl /priority/       contained 
-synt match switchport_base_kwds excludenl /encapsulation/  contained 
+synt match switchport_base_kwds excludenl /monitor/        contained
+synt match switchport_base_kwds excludenl /trunk/          contained
+synt match switchport_base_kwds excludenl /port-security/  contained
+synt match switchport_base_kwds excludenl /private-vlan/   contained skipwhite nextgroup=switchport_mode_privatevlan_kwds
+synt match switchport_base_kwds excludenl /block/          contained
+synt match switchport_base_kwds excludenl /priority/       contained
+synt match switchport_base_kwds excludenl /encapsulation/  contained
 exe s:h . "switchport_base_kwds" . s:keyword2
 
 " the switchport_command region contains subregions which in turn have end of line terminations
@@ -1248,7 +1248,7 @@ exe s:h . "switchport_block_kw" . s:keyword4
 " switchport dot1q ethertype {{{2
 
 synt match switchport_dot1q_kw /[dD]ot1[qQ] / contained containedin=switchport_dot1q_ethertype_region
-exe s:h . "switchport_dot1q_kw" . s:keyword2 
+exe s:h . "switchport_dot1q_kw" . s:keyword2
 
 synt match switchport_dot1q_ethertype_kw /ethertype/ contained containedin=switchport_dot1q_ethertype_region skipwhite nextgroup=switchport_dot1q_ethertype_value
 exe s:h . "switchport_dot1q_ethertype_kw" . s:keyword3
@@ -1264,7 +1264,7 @@ synt match switchport_capture_allowed_vlan excludenl  /add/     contained contai
 synt match switchport_capture_allowed_vlan excludenl  /except/  contained containedin=switchport_capture_allowed_vlan_region skipwhite nextgroup=switchport_capture_allowed_vlan_kw
 synt match switchport_capture_allowed_vlan excludenl  /remove/  contained containedin=switchport_capture_allowed_vlan_region skipwhite nextgroup=switchport_capture_allowed_vlan_kw
 synt match switchport_capture_allowed_vlan excludenl  /all/     contained containedin=switchport_capture_allowed_vlan_region
-exe s:h . "switchport_capture_allowed_vlan" . s:keyword3 
+exe s:h . "switchport_capture_allowed_vlan" . s:keyword3
 
 synt match switchport_capture_allowed_vlan_kw excludenl  /vlan/ contained containedin=switchport_capture_allowed_vlan_region
 exe s:h . "switchport_capture_allowed_vlan_kw" . s:keyword4
@@ -1280,7 +1280,7 @@ synt region switchport_capture_allowed_vlan_region matchgroup=switchport_base_kw
 " switchport access {{{2
 
 synt match switchport_conf_access_vlan_kw excludenl  /vlan/ skipwhite contained containedin=switchport_conf_access nextgroup=switchport_conf_access_kw_WORDS
-exe s:h . "switchport_conf_access_vlan_kw" . s:keyword4 
+exe s:h . "switchport_conf_access_vlan_kw" . s:keyword4
 
 synt match switchport_conf_access_kw_WORDS excludenl  /[0-9 ,]\+/ contained containedin=switchport_conf_access
 exe s:h . "switchport_conf_access_kw_WORDS" . s:parameter1
@@ -1293,14 +1293,14 @@ synt region switchport_conf_access matchgroup=switchport_base_kwds start=/access
 synt match switchport_trunk_kwds /encapsulation/ contained skipwhite containedin=switchport_trunk nextgroup=switchport_trunk_encap_kwds
 synt match switchport_trunk_kwds /ethertype/     contained skipwhite containedin=switchport_trunk nextgroup=switchport_trunk_ethertype_value
 synt match switchport_trunk_kwds /pruning/       contained skipwhite containedin=switchport_trunk nextgroup=switchport_trunk_pruning_vlan_list
-synt match switchport_trunk_kwds /allowed/       contained skipwhite containedin=switchport_trunk 
-synt match switchport_trunk_kwds /native/        contained skipwhite containedin=switchport_trunk 
+synt match switchport_trunk_kwds /allowed/       contained skipwhite containedin=switchport_trunk
+synt match switchport_trunk_kwds /native/        contained skipwhite containedin=switchport_trunk
 exe s:h . "switchport_trunk_kwds" . s:keyword3
 
 synt match switchport_trunk_encap_kwds /encapsulation [Dd]ot1[qQ]/ms=s+13,hs=s+13 contained containedin=switchport_trunk_encap_kwds
 synt match switchport_trunk_encap_kwds /[iI][sS][lL]/ contained containedin=switchport_trunk_kwds,switchport_trunk,switchport_command
 synt match switchport_trunk_encap_kwds /negotiate/ contained containedin=switchport_trunk_kwds,switchport_trunk
-exe s:h . "switchport_trunk_encap_kwds" . s:keyword4 
+exe s:h . "switchport_trunk_encap_kwds" . s:keyword4
 
 synt match switchport_trunk_native_vlan_ID /\d\{-1,4}/ contained containedin=switchport_trunk_kwds
 synt match switchport_trunk_native_vlan_ID /tag/       contained containedin=switchport_trunk_kwds
@@ -1321,7 +1321,7 @@ synt match switchport_trunk_allowed_vlan_kwds /add/      skipwhite contained con
 synt match switchport_trunk_allowed_vlan_kwds /all/      skipwhite contained containedin=switchport_trunk_allowed_vlan_region
 synt match switchport_trunk_allowed_vlan_kwds /except/   skipwhite contained containedin=switchport_trunk_allowed_vlan_region nextgroup=switchport_trunk_allowed_vlan_list
 synt match switchport_trunk_allowed_vlan_kwds /remove/   skipwhite contained containedin=switchport_trunk_allowed_vlan_region nextgroup=switchport_trunk_allowed_vlan_list
-synt match switchport_trunk_allowed_vlan_kwds /none/     contained 
+synt match switchport_trunk_allowed_vlan_kwds /none/     contained
 exe s:h . "switchport_trunk_allowed_vlan_kwds" . s:keyword5
 
 synt match switchport_trunk_allowed_vlan_list /\v[0-9,\- ]+/ contained containedin=switchport_trunk_allowed_vlan_kwds,switchport_trunk_allowed_vlan_region
@@ -1366,7 +1366,7 @@ exe s:h . "switchport_mode_privatevlan_kwds" . s:keyword4
 synt match switchport_privatevlan_1 /\v[0-9\- ]+/ contained containedin=switchport_mode_privatevlan_kwds skipwhite nextgroup=switchport_privatevlan_2
 exe s:h . "switchport_privatevlan_1" . s:parameter2
 
-synt match switchport_privatevlan_2 /\v[0-9\- ]+/ contained 
+synt match switchport_privatevlan_2 /\v[0-9\- ]+/ contained
 exe s:h . "switchport_privatevlan_2" . s:parameter4
 "hi switchport_privatevlan_2 ctermfg=red guifg=red gui=italic
 
@@ -1399,7 +1399,7 @@ synt region switchport_block matchgroup=switchport_base_kwds start=/block/rs=e e
 synt match switchport_priority_extend_kw /extend/    contained containedin=switchport_priority nextgroup=switchport_priority_extend_words
 exe s:h . "switchport_priority_extend_kw" . s:keyword3
 
-synt match switchport_priority_extend_words /trust/  contained containedin=switchport_priority 
+synt match switchport_priority_extend_words /trust/  contained containedin=switchport_priority
 synt match switchport_priority_extend_words /[0-7]/  contained containedin=switchport_priority
 synt match switchport_priority_extend_words /cos/    contained skipwhite containedin=switchport_priority nextgroup=switchport_extent_cos_values
 exe s:h . "switchport_priority_extend_words" . s:keyword4
@@ -1430,7 +1430,7 @@ synt region encapsulation_command excludenl start=/ \+encapsulation / end=/$/ ke
 " NOTE: this is currently a template to be backmigrated to other areas if it
 " works out well - JDB 1/9/2015
 
-synt region channel_group_region start=/channel-group / end=/$/ transparent 
+synt region channel_group_region start=/channel-group / end=/$/ transparent
 
 synt match channel_group_kw /channel-group/ contained containedin=channel_group_region skipwhite nextgroup=channel_group_number
 exe s:h . "channel_group_kw" . s:keyword1
@@ -1441,24 +1441,24 @@ exe s:h . "channel_group_number" . s:parameter1
 synt match channel_group_mode_kw /mode/ contained skipwhite nextgroup=channel_group_mode
 exe s:h . "channel_group_mode_kw" . s:keyword2
 
-synt match channel_group_mode /on/           contained containedin=channel_group_mode_kw 
+synt match channel_group_mode /on/           contained containedin=channel_group_mode_kw
 synt match channel_group_mode /active/       contained containedin=channel_group_mode_kw
 synt match channel_group_mode /passive/      contained containedin=channel_group_mode_kw
 synt match channel_group_mode /auto/         contained containedin=channel_group_mode_kw
 synt match channel_group_mode /desirable/    contained containedin=channel_group_mode_kw
 exe s:h . "channel_group_mode" . s:parameter1
 
-synt region channel_protocol_region start=/channel-protocol / end=/$/ transparent 
+synt region channel_protocol_region start=/channel-protocol / end=/$/ transparent
 
 synt match channel_protocol_kw /channel-protocol/ contained containedin=channel_protocol_region skipwhite nextgroup=channel_protocol
 exe s:h "channel_protocol_kw" . s:keyword1
 
-synt match channel_protocol /lacp/ contained skipwhite containedin=channel_protocol_kw 
-synt match channel_protocol /pagp/ contained skipwhite containedin=channel_protocol_kw 
+synt match channel_protocol /lacp/ contained skipwhite containedin=channel_protocol_kw
+synt match channel_protocol /pagp/ contained skipwhite containedin=channel_protocol_kw
 exe s:h . "channel_protocol" . s:parameter1
 
 " LACP port priority {{{2
-synt region lacp_priority_region start=/lacp port\-prior/ end=/$/ transparent 
+synt region lacp_priority_region start=/lacp port\-prior/ end=/$/ transparent
 
 synt match lacp_kw /lacp/ contained containedin=lacp_priority_region contained skipwhite containedin=lacp_priority_region
 exe s:h . "lacp_kw" . s:keyword1
@@ -1509,13 +1509,13 @@ synt match ip_pim_subs /hello-authentication/ contained skipwhite nextgroup=hell
 synt match ip_pim_subs /hello-interval/ contained skipwhite nextgroup=parameter1
 synt match ip_pim_subs /jp-policy/ contained skipwhite nextgroup=parameter1,jp_policy
 synt match ip_pim_subs /neighbor-policy/ contained skipwhite nextgroup=neighbor_policy
-synt match ip_pim_subs /sparse-mode/ contained 
+synt match ip_pim_subs /sparse-mode/ contained
 exe s:h . "ip_pim_subs" . s:keyword3
 
 synt match int_ip_router_protocol /[^ ]\+/ skipwhite contained nextgroup=process_tag
 exe s:h . "int_ip_router_protocol" . s:parameter1
 
-synt match process_tag /[0-9]\+/ skipwhite contained 
+synt match process_tag /[0-9]\+/ skipwhite contained
 exe s:h . "process_tag" . s:parameter2
 
 synt region hsrp matchgroup=hsrp_KW start=/^ \+ hsrp / end=/$/ keepend transparent contains=numeric_parameter1
@@ -1556,33 +1556,33 @@ synt match hsrp_auth_md5_subs /key-string/  contained skipwhite nextgroup=cisco_
 exe s:h . 'hsrp_auth_md5_subs' . s:keyword3
 
 " int_ip_reg_KW {{{2
-synt match int_ip_reg_KW /address/            skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /arp/                skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /authentication/     skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /bandwidth-percent/  skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /bandwidth/          skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /delay/              skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /directed-broadcast/ skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /distribute-list/    skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /eigrp/              skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /hello-interval/     skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /hold-time/          skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /igmp/               skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /local-proxy-arp/    skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /mtu/                skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /next-hop-self/      skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /offset-list/        skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /passive-interface/  skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /pim/                skipwhite contained containedin=int_ip_reg 
+synt match int_ip_reg_KW /address/            skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /arp/                skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /authentication/     skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /bandwidth-percent/  skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /bandwidth/          skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /delay/              skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /directed-broadcast/ skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /distribute-list/    skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /eigrp/              skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /hello-interval/     skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /hold-time/          skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /igmp/               skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /local-proxy-arp/    skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /mtu/                skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /next-hop-self/      skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /offset-list/        skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /passive-interface/  skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /pim/                skipwhite contained containedin=int_ip_reg
 synt match int_ip_reg_KW /policy/             skipwhite contained containedin=int_ip_reg nextgroup=ip_policy_rm
-synt match int_ip_reg_KW /port-unreachable/   skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /proxy-arp/          skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /redirects/          skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /router/             skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /split-horizon/      skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /summary-address/    skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /unreachables/       skipwhite contained containedin=int_ip_reg 
-synt match int_ip_reg_KW /vrf/                skipwhite contained containedin=int_ip_reg 
+synt match int_ip_reg_KW /port-unreachable/   skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /proxy-arp/          skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /redirects/          skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /router/             skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /split-horizon/      skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /summary-address/    skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /unreachables/       skipwhite contained containedin=int_ip_reg
+synt match int_ip_reg_KW /vrf/                skipwhite contained containedin=int_ip_reg
 exe s:h . "int_ip_reg_KW" . s:keyword2
 " }}}2
 
@@ -1594,7 +1594,7 @@ exe s:h . "ip_policy_rm" . s:keyword3
 
 
 " ip authentication {{{2
-synt match int_ip_auth_key_chain /[^ ]\+/ skipwhite contained containedin=int_ip_auth_region 
+synt match int_ip_auth_key_chain /[^ ]\+/ skipwhite contained containedin=int_ip_auth_region
 exe s:h . "int_ip_auth_key_chain" . s:parameter2
 
 synt match int_ip_auth_AS /[0-9]\+ /      skipwhite contained containedin=int_ip_auth_region nextgroup=int_ip_auth_key_chain
@@ -1658,17 +1658,17 @@ synt region int_ip_pim matchgroup=int_ip_reg_KW start=/pim /rs=e end=/$/ skipwhi
 synt match router_kw /router / skipwhite contained containedin=router_mode_region nextgroup=routing_protocol
 exe s:h . 'router_kw' . s:keyword1 . s:underline
 
- 
-synt match routing_protocol /bgp /        skipwhite contained nextgroup=process_id 
-synt match routing_protocol /eigrp /      skipwhite contained nextgroup=process_id 
-synt match routing_protocol /isis /       skipwhite contained nextgroup=process_id 
-synt match routing_protocol /iso\-igrp /  skipwhite contained nextgroup=process_id 
-synt match routing_protocol /lisp /       skipwhite contained nextgroup=process_id 
-synt match routing_protocol /mobile /     skipwhite contained 
-synt match routing_protocol /odr /        skipwhite contained 
-synt match routing_protocol /ospf /       skipwhite contained nextgroup=process_id 
-synt match routing_protocol /ospfv3 /     skipwhite contained nextgroup=process_id 
-synt match routing_protocol /rip /        skipwhite contained 
+
+synt match routing_protocol /bgp /        skipwhite contained nextgroup=process_id
+synt match routing_protocol /eigrp /      skipwhite contained nextgroup=process_id
+synt match routing_protocol /isis /       skipwhite contained nextgroup=process_id
+synt match routing_protocol /iso\-igrp /  skipwhite contained nextgroup=process_id
+synt match routing_protocol /lisp /       skipwhite contained nextgroup=process_id
+synt match routing_protocol /mobile /     skipwhite contained
+synt match routing_protocol /odr /        skipwhite contained
+synt match routing_protocol /ospf /       skipwhite contained nextgroup=process_id
+synt match routing_protocol /ospfv3 /     skipwhite contained nextgroup=process_id
+synt match routing_protocol /rip /        skipwhite contained
 exe s:h . "routing_protocol" . s:keyword2 . s:underline
 
 synt match process_id /[^ ]\+ */ skipwhite contained
@@ -1692,12 +1692,12 @@ synt match address_family_kw3 /unicast/  skipwhite contained containedin=address
 exe s:h . "address_family_kw3" . s:keyword3
 
 synt match af_vrf_kw /vrf/   skipwhite contained containedin=address_family_region nextgroup=vrf_name
-exe s:h . "af_vrf_kw" . s:keyword4 
+exe s:h . "af_vrf_kw" . s:keyword4
 
 synt region address_family_region start=/ address\-family/ end=/$/ transparent keepend excludenl
 
 synt match exit_address_family /exit\-address\-family/ skipwhite
-exe s:h . "exit_address_family" . s:fggray 
+exe s:h . "exit_address_family" . s:fggray
 " }}}
 " distribute-list {{{
 
@@ -1714,7 +1714,7 @@ exe s:h . "dl_prefix_name" . s:parameter3 s:italic
 
 synt match dl_in_out /in/    skipwhite contained
 synt match dl_in_out /out/   skipwhite contained
-exe s:h . "dl_in_out" . s:keyword3 
+exe s:h . "dl_in_out" . s:keyword3
 
 synt region distribute_list_region start=/distribute\-list/ end=/$/ transparent excludenl keepend
 
@@ -1738,7 +1738,7 @@ exe s:h . "ip_route_vrf_name" . s:none . s:parameter1
 synt match route_name_kw /name / skipwhite contained containedin=ip_rt nextgroup=route_name_text
 exe s:h . "route_name_kw" . s:fgbrown
 
-synt match route_name_text /.*/ skipwhite contained 
+synt match route_name_text /.*/ skipwhite contained
 exe s:h . "route_name_text" . s:parameter3
 
 synt match ip_rt_address /address/ skipwhite contained containedin=ip_rt
@@ -1757,7 +1757,7 @@ exe s:h . "isakmp_KW" . s:keyword2
 synt match isakmp_key_KW /key/ skipwhite contained  nextgroup=parameter
 exe s:h . "isakmp_key_KW" . s:keyword3
 
-synt match crypto_isakmp_address_KW /address/ skipwhite contained 
+synt match crypto_isakmp_address_KW /address/ skipwhite contained
 exe s:h . "crypto_isakmp_address_KW" . s:keyword5
 
 "}}}
@@ -1800,7 +1800,7 @@ exe s:h . "crypto_map_type" . s:fgparameter3 . s:underline
 synt match prefix_name excludenl  / [^ ]\+/ skipwhite contained containedin=prefix_list_kw
 exe s:h . "prefix_name" . s:fgbluegreen
 
-synt match prefix_list_kw excludenl /prefix-list/ contained containedin=ip nextgroup=parameter3 skipwhite 
+synt match prefix_list_kw excludenl /prefix-list/ contained containedin=ip nextgroup=parameter3 skipwhite
 exe s:h . "prefix_list_kw" . s:keyword2
 
 syntax cluster prefix_list contains=prefix_name,prefix_list_kw
@@ -1814,8 +1814,8 @@ exe s:h . "seqnum" . s:fggreen
 "}}}
 " Ethernet address {{{
 
-synt match ethernet_address excludenl /\v[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}/ 
-synt match ethernet_address excludenl /\v[0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}/ 
+synt match ethernet_address excludenl /\v[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}/
+synt match ethernet_address excludenl /\v[0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}[-:][0-9A-Fa-f]{2}/
 exe s:h . "ethernet_address" . s:bold . s:fgred
 
 "}}}
@@ -1845,20 +1845,20 @@ exe s:h . "ethernet_address" . s:bold . s:fgred
 "HiLink ipaddr_octet_4 helpNote
 
 "2}}}
-synt match zeros excludenl /\s0\.0\.0\.0/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite 
+synt match zeros excludenl /\s0\.0\.0\.0/ nextgroup=ipaddr,ipaddr_cidr,subnetmask,wildcard skipwhite
 exe s:h . "zeros" . s:bold . s:fgpink
 
 "syn match ipaddress /(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d\d|2[0-4]\d|25[0-5]|[1-9]\d|\d)/
 
 
-synt match ipaddress excludenl /\v\s(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask skipwhite 
+synt match ipaddress excludenl /\v\s(25[0-4]|2[0-4]\d|1\d{1,2}|[1-9]\d|[1-9])\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ nextgroup=ipaddr_cidr,subnetmask skipwhite
 exe s:h . "ipaddress" . s:fgpink
 
 
 "syn match badmask /\v (12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
 "					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
 "					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})\.
-"					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})excludenl / contained 
+"					   \(12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})excludenl / contained
 "exe s:h . "badmask" . s:rev . s:fgred
 
 " BadIPaddr match {{{2
@@ -1888,16 +1888,16 @@ exe s:h . "subnetmask" . s:italic . s:keyword1
 synt match wildcard contained excludenl  /\v (127|63|31|15|7|3|1|0)\.(255|127|63|31|15|7|3|1|0)\.(255|127|63|31|15|7|3|1|0)\.(255|127|63|31|15|7|3|1|0)/he=e+1
 exe s:h . "wildcard" . s:italic . s:fgblue
 
-synt match ipaddr_kw excludenl /ip address/ contained 
+synt match ipaddr_kw excludenl /ip address/ contained
 exe s:h . "ipaddr_kw" . s:keyword1
 
-"syn match badmaskoctect excludenl /\v( 12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})/ contained 
+"syn match badmaskoctect excludenl /\v( 12[0-79]|19[013-9]|1[013-8]\d|22[0-35-9]|24[13-9]|25[0136-9]|0\d{1,})/ contained
 "exe s:h . "badmaskoctect" . s:standout . s:fgred
 
 "syn match ipaddr_anyerror "\a\|\d\|[.()!#^&*\-_=+{};'",.excludenl  /<>?]\+" contained containedin=ipaddr_region
 "exe s:h . "ipaddr_anyerror" . s:rev . s:fgred
 
-synt match ipaddr_otherkw_param excludenl /.\+$/ contained 
+synt match ipaddr_otherkw_param excludenl /.\+$/ contained
 exe s:h . "ipaddr_otherkw_param" . s:fgorange
 
 " add more keywords that follow "ip address" in various places below as needed.
@@ -1914,7 +1914,7 @@ exe s:h . "ipaddr" . s:fgpink . s:bold_italic
 
 "syn region ipaddr_subnetmask_in_ipaddr matchgroup=subnetmask start=/\v(0|192|224|240|248|252|254|255)\.(0|128|192|240|224|248|252|254|255)\.(0|128|192|224|240|248|252|254|255)\.(0|128|192|224|240|248|252|254|255)/ end=/$/ keepend skipwhite transparent excludenl contains=subnetmask contained
 
-"syn region ipaddr_in_ciscoipaddr matchgroup=ipaddr start=/\v(25[0-4]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2}|0)\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2}|0)\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ end=/$/ keepend skipwhite excludenl transparent contains=ipaddr_cidr,ipaddr,ipaddr_subnetmask_in_ipaddr 
+"syn region ipaddr_in_ciscoipaddr matchgroup=ipaddr start=/\v(25[0-4]|2[0-4]\d|1\d\d|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2}|0)\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2}|0)\.(25[0-5]|2[0-4]\d|1\d\d|\d{1,2})/ end=/$/ keepend skipwhite excludenl transparent contains=ipaddr_cidr,ipaddr,ipaddr_subnetmask_in_ipaddr
 
 synt region ipaddr_region matchgroup=ipaddr_kw start=/ip addr[e]\{,1}[s]\{,1}[s]\{,1}/rs=e+1 end=/$/ contains=ipaddr_in_ciscoipaddr,ipaddr,ipaddr_cidr,subnetmask,wildcard keepend excludenl transparent skipwhite
 
@@ -1980,7 +1980,7 @@ synt match logging_buffered /warnings/       skipwhite contained
 synt match logging_buffered /xml/            skipwhite contained
 synt match logging_buffered /[0-4]/          skipwhite contained
 synt match logging_buffered /4[0-9][0-9][0-9][0-9]\{0,}/ skipwhite contained nextgroup=logging_severity
-exe s:h . "logging_buffered" . s:parameter1 
+exe s:h . "logging_buffered" . s:parameter1
 " }}}2
 
 " logging_severity {{{2
@@ -1993,7 +1993,7 @@ synt match logging_severity /errors/         skipwhite contained
 synt match logging_severity /informational/  skipwhite contained
 synt match logging_severity /notifications/  skipwhite contained
 synt match logging_severity /warnings/       skipwhite contained
-exe s:h . "logging_severity" . s:parameter2 
+exe s:h . "logging_severity" . s:parameter2
 " }}}2
 
 " logging_facility {{{2
@@ -2021,7 +2021,7 @@ synt match logging_facility /sys9/       skipwhite contained
 synt match logging_facility /syslog/     skipwhite contained
 synt match logging_facility /user/       skipwhite contained
 synt match logging_facility /uucp/       skipwhite contained
-exe s:h . "logging_facility" . s:parameter3 
+exe s:h . "logging_facility" . s:parameter3
 " }}}2
 
 "logging_filter {{{2
@@ -2038,13 +2038,13 @@ synt match logging_filter /scp:/          skipwhite contained nextgroup=logging_
 synt match logging_filter /stby\-nvram:/  skipwhite contained nextgroup=logging_filter_args
 synt match logging_filter /stby\-rcsf:/   skipwhite contained nextgroup=logging_filter_args
 synt match logging_filter /tftp:/         skipwhite contained nextgroup=logging_filter_args
-exe s:h . "logging_filter" . s:keyword3 
+exe s:h . "logging_filter" . s:keyword3
 " }}}2
 
 " logging_filter_args {{{2
 synt match logging_filter_args /1/       skipwhite contained
 synt match logging_filter_args /args/    skipwhite contained
-exe s:h . "logging_filter_args" . s:parameter3 
+exe s:h . "logging_filter_args" . s:parameter3
 " }}}2
 
 synt match logging_event_type /[^ ]\+/ skipwhite contained
@@ -2094,7 +2094,7 @@ exe s:h . " mbitsec5b " . s:bold . s:gbitssec
 
 
 syn region gbitsec_reg start=/\(BW\|bandwidth is\) [0-9]\{7} / end=/Kbit/ oneline keepend contains=gbitsec2b,gbitsec3b,gbitsec4b
-syn match gbitsec4b excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec4b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec4b " . s:bold . s:mbitssec
 syn match gbitsec3b excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec4b
 exe s:h . " gbitsec3b " . s:bold . s:gbitssec
@@ -2102,7 +2102,7 @@ syn match gbitsec2b excludenl  /[0-9]\{1}/ contained nextgroup=gbitsec3b
 exe s:h . " gbitsec2b " . s:bold . s:tbitssec
 
 syn region gbitsec_reg2 start=/\(BW\|bandwidth is\) [0-9]\{8} / end=/Kbit/ oneline keepend contains=gbitsec5b,gbitsec6b,gbitsec7b
-syn match gbitsec7b excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec7b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec7b " . s:bold . s:mbitssec
 syn match gbitsec6b excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec7b
 exe s:h . " gbitsec6b " . s:bold . s:gbitssec
@@ -2110,7 +2110,7 @@ syn match gbitsec5b excludenl  /[0-9]\{2}/ contained nextgroup=gbitsec6b
 exe s:h . " gbitsec5b " . s:bold . s:tbitssec
 
 syn region gbitsec_reg3 start=/\(BW\|bandwidth is\) [0-9]\{9} / end=/Kbit/ oneline keepend contains=gbitsec8b,gbitsec9b,gbitsec10b
-syn match gbitsec10b excludenl  /[0-9]\{3}/ contained 
+syn match gbitsec10b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbitsec10b " . s:bold . s:mbitssec
 syn match gbitsec9b excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec10b
 exe s:h . " gbitsec9b " . s:bold . s:gbitssec
@@ -2119,7 +2119,7 @@ exe s:h . " gbitsec8b " . s:bold . s:tbitssec
 
 
 syn region tbitsec_reg start=/\(BW\|bandwidth is\) [0-9]\{10} / end=/Kbit/ oneline keepend contains=tbitsec2b,tbitsec3b,tbitsec4b,tbitsec5b
-syn match tbitsec5b excludenl /[0-9]\{3}/ contained 
+syn match tbitsec5b excludenl /[0-9]\{3}/ contained
 exe s:h . " tbitsec5b " . s:bold . s:mbitssec
 syn match tbitsec4b excludenl /[0-9]\{3}/ contained nextgroup=tbitsec5b
 exe s:h . " tbitsec4b " . s:bold . s:gbitssec
@@ -2150,7 +2150,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "
 "
 "syn region gbytes_reg start=/[0-9]\{7} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=gbytes2b,gbytes3b,gbytes4b
-"syn match gbytes4b excludenl  /[0-9]\{3}/ contained 
+"syn match gbytes4b excludenl  /[0-9]\{3}/ contained
 "exe s:h . " gbytes4b " . s:bold . s:kbitssec
 "syn match gbytes3b excludenl  /[0-9]\{3}/ contained nextgroup=gbytes4b
 "exe s:h . " gbytes3b " . s:bold . s:mbitssec
@@ -2158,7 +2158,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " gbytes2b " . s:bold . s:gbitssec
 "
 "syn region gbytes_reg2 start=/[0-9]\{8} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=gbytes5b,gbytes6b,gbytes7b
-"syn match gbytes7b excludenl  /[0-9]\{3}/ contained 
+"syn match gbytes7b excludenl  /[0-9]\{3}/ contained
 "exe s:h . " gbytes7b " . s:bold . s:kbitssec
 "syn match gbytes6b excludenl  /[0-9]\{3}/ contained nextgroup=gbytes7b
 "exe s:h . " gbytes6b " . s:bold . s:mbitssec
@@ -2166,7 +2166,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " gbytes5b " . s:bold . s:gbitssec
 "
 "syn region gbytes_reg3 start=/[0-9]\{9} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=gbytes8b,gbytes9b,gbytes10b
-"syn match gbytes10b excludenl  /[0-9]\{3}/ contained 
+"syn match gbytes10b excludenl  /[0-9]\{3}/ contained
 "exe s:h . " gbytes10b " . s:bold . s:kbitssec
 "syn match gbytes9b excludenl  /[0-9]\{3}/ contained nextgroup=gbytes10b
 "exe s:h . " gbytes9b " . s:bold . s:mbitssec
@@ -2175,7 +2175,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "
 "
 "syn region tbytes_reg start=/[0-9]\{10} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=tbytes2b,tbytes3b,tbytes4b,tbytes5b
-"syn match tbytes5b excludenl /[0-9]\{3}/ contained 
+"syn match tbytes5b excludenl /[0-9]\{3}/ contained
 "exe s:h . " tbytes5b " . s:bold . s:kbitssec
 "syn match tbytes4b excludenl /[0-9]\{3}/ contained nextgroup=tbytes5b
 "exe s:h . " tbytes4b " . s:bold . s:mbitssec
@@ -2186,7 +2186,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "
 "
 "syn region tbytes_reg2 start=/[0-9]\{11} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=tbytes6b,tbytes7b,tbytes8b,tbytes9b
-"syn match tbytes9b excludenl /[0-9]\{3}/ contained 
+"syn match tbytes9b excludenl /[0-9]\{3}/ contained
 "exe s:h . " tbytes9b " . s:bold . s:kbitssec
 "syn match tbytes8b excludenl /[0-9]\{3}/ contained nextgroup=tbytes9b
 "exe s:h . " tbytes8b " . s:bold . s:mbitssec
@@ -2196,7 +2196,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " tbytes6b " . s:bold . s:tbitssec
 "
 "syn region tbytes_reg3 start=/[0-9]\{12} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=tbytes10b,tbytes11b,tbytes12b,tbytes13b,tbytes14b
-"syn match tbytes13b excludenl /[0-9]\{3}/ contained 
+"syn match tbytes13b excludenl /[0-9]\{3}/ contained
 "exe s:h . " tbytes13b " . s:bold . s:kbitssec
 "syn match tbytes12b excludenl /[0-9]\{3}/ contained nextgroup=tbytes13b
 "exe s:h . " tbytes12b " . s:bold . s:mbitssec
@@ -2206,7 +2206,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " tbytes10b " . s:bold . s:tbitssec
 "
 "syn region pbytes_reg start=/[0-9]\{13} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=pbytes1b,pbytes2b,pbytes3b,pbytes4b,pbytes5b
-"syn match pbytes5b excludenl /[0-9]\{3}/ contained 
+"syn match pbytes5b excludenl /[0-9]\{3}/ contained
 "exe s:h . " pbytes5b " . s:bold . s:kbitssec
 "syn match pbytes4b excludenl /[0-9]\{3}/ contained nextgroup=pbytes5b
 "exe s:h . " pbytes4b " . s:bold . s:mbitssec
@@ -2218,7 +2218,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " pbytes1b " . s:bold . s:pbitssec
 "
 "syn region pbytes_reg2 start=/[0-9]\{14} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=pbytes6b,pbytes7b,pbytes8b,pbytes9b,pbytes10b
-"syn match pbytes10b excludenl /[0-9]\{3}/ contained 
+"syn match pbytes10b excludenl /[0-9]\{3}/ contained
 "exe s:h . " pbytes10b " . s:bold . s:kbitssec
 "syn match pbytes9b excludenl /[0-9]\{3}/ contained nextgroup=pbytes10b
 "exe s:h . " pbytes9b " . s:bold . s:mbitssec
@@ -2230,7 +2230,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " pbytes6b " . s:bold . s:pbitssec
 "
 "syn region pbytes_reg3 start=/[0-9]\{15} \(bytes\|packets\)/ end=/,\| \|$/ oneline keepend contains=pbytes11b,pbytes12b,pbytes13b,pbytes14b,pbytes15b
-"syn match pbytes15b excludenl /[0-9]\{3}/ contained 
+"syn match pbytes15b excludenl /[0-9]\{3}/ contained
 "exe s:h . " pbytes15b " . s:bold . s:kbitssec
 "syn match pbytes14b excludenl /[0-9]\{3}/ contained nextgroup=pbytes15b
 "exe s:h . " pbytes14b " . s:bold . s:mbitssec
@@ -2246,23 +2246,23 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 
 " input/output bits per second {{{ 1
 "syn region bitsec_reg start=/ \(rate\|is\) [0-9]\{2,3} / end=/bit\/sec/ oneline keepend contains=bitsec
-"syn match bitsec excludenl /[0-9]\{1,3}/ contained 
+"syn match bitsec excludenl /[0-9]\{1,3}/ contained
 "exe s:h . " bitsec " . s:bold . s:bitssec
 "
 "syn region kbitsec_reg start=/\(is\|rate\) [0-9]\{4} / end=/bit/  oneline keepend contains=kbitsec1,kbitsec2
-"syn match kbitsec2 excludenl /[0-9]\{3}/ contained 
+"syn match kbitsec2 excludenl /[0-9]\{3}/ contained
 "exe s:h . " kbitsec2 " . s:bold . s:bitssec
 "syn match kbitsec1 excludenl  /[0-9]\{1}/ contained nextgroup=kbitsec2
 "exe s:h . " kbitsec1 " . s:bold . s:kbitssec
 "
-"syn region kbitsec_reg2 start=/\(is\|rate\) [0-9]\{5} / end=/bit/  oneline keepend contains=kbitsec3,kbitsec4 
-"syn match kbitsec4 excludenl /[0-9]\{3}/ contained 
+"syn region kbitsec_reg2 start=/\(is\|rate\) [0-9]\{5} / end=/bit/  oneline keepend contains=kbitsec3,kbitsec4
+"syn match kbitsec4 excludenl /[0-9]\{3}/ contained
 "exe s:h . " kbitsec4 " . s:bold . s:bitssec
 "syn match kbitsec3 excludenl  / [0-9]\{2}/ contained nextgroup=kbitsec4
 "exe s:h . " kbitsec3 " . s:bold . s:kbitssec
 "
 "syn region kbitsec_reg3 start=/\(is\|rate\) [0-9]\{6} / end=/bit/  oneline keepend contains=kbitsec5,kbitsec6
-"syn match kbitsec6 excludenl /[0-9]\{3}/ contained 
+"syn match kbitsec6 excludenl /[0-9]\{3}/ contained
 "exe s:h . " kbitsec6 " . s:bold . s:bitssec
 "syn match kbitsec5 excludenl  / [0-9]\{3}/ contained nextgroup=kbitsec6
 "exe s:h . " kbitsec5 " . s:bold . s:kbitssec
@@ -2270,7 +2270,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "
 "
 "syn region mbitsec_reg start=/\(is\|rate\) [0-9]\{7} / end=/bit/ oneline keepend contains=mbitsec1,mbitsec2,mbitsec3
-"syn match mbitsec3 excludenl  /[0-9]\{3}/ contained 
+"syn match mbitsec3 excludenl  /[0-9]\{3}/ contained
 "exe s:h . " mbitsec3 " . s:bold . s:bitssec
 "syn match mbitsec2 excludenl  /[0-9]\{3}/ contained nextgroup=mbitsec3
 "exe s:h . " mbitsec2 " . s:bold . s:kbitssec
@@ -2278,7 +2278,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " mbitsec1 " . s:bold . s:mbitssec
 "
 "syn region mbitsec_reg2 start=/\(is\|rate\) [0-9]\{8} / end=/bit/ oneline keepend contains=mbitsec4,mbitsec5,mbitsec6
-"syn match mbitsec6 excludenl  /[0-9]\{3}/ contained 
+"syn match mbitsec6 excludenl  /[0-9]\{3}/ contained
 "exe s:h . " mbitsec6 " . s:bold . s:bitssec
 "syn match mbitsec5 excludenl  /[0-9]\{3}/ contained nextgroup=mbitsec6
 "exe s:h . " mbitsec5 " . s:bold . s:kbitssec
@@ -2286,7 +2286,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " mbitsec4 " . s:bold . s:mbitssec
 "
 "syn region mbitsec_reg3 start=/\(is\|rate\) [0-9]\{9} / end=/bit/ oneline keepend contains=mbitsec9,mbitsec8,mbitsec7
-"syn match mbitsec7 excludenl  /[0-9]\{3}/ contained 
+"syn match mbitsec7 excludenl  /[0-9]\{3}/ contained
 "exe s:h . " mbitsec7 " . s:bold . s:bitssec
 "syn match mbitsec8 excludenl  /[0-9]\{3}/ contained nextgroup=mbitsec7
 "exe s:h . " mbitsec8 " . s:bold . s:kbitssec
@@ -2296,7 +2296,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "
 "
 "syn region gbitsec_reg start=/\(is\|rate\) [0-9]\{10} / end=/bit/ oneline keepend contains=gbitsec1,gbitsec2,gbitsec3,gbitsec4
-"syn match gbitsec4 excludenl  /[0-9]\{3}/ contained 
+"syn match gbitsec4 excludenl  /[0-9]\{3}/ contained
 "exe s:h . " gbitsec4 " . s:bold . s:bitssec
 "syn match gbitsec3 excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec4
 "exe s:h . " gbitsec3 " . s:bold . s:kbitssec
@@ -2306,7 +2306,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " gbitsec1 " . s:bold . s:gbitssec
 "
 "syn region gbitsec_reg2 start=/\(is\|rate\) [0-9]\{11} / end=/bit/ oneline keepend contains=gbitsec5,gbitsec6,gbitsec7,gbitsec8
-"syn match gbitsec8 excludenl  /[0-9]\{3}/ contained 
+"syn match gbitsec8 excludenl  /[0-9]\{3}/ contained
 "exe s:h . " gbitsec8 " . s:bold . s:bitssec
 "syn match gbitsec7 excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec8
 "exe s:h . " gbitsec7 " . s:bold . s:kbitssec
@@ -2316,7 +2316,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "exe s:h . " gbitsec5 " . s:bold . s:gbitssec
 "
 "syn region gbitsec_reg3 start=/\(is\|rate\) [0-9]\{12} / end=/bit/ oneline keepend contains=gbitsec9,gbitsec10,gbitsec11,gbitsec12
-"syn match gbitsec12 excludenl  /[0-9]\{3}/ contained 
+"syn match gbitsec12 excludenl  /[0-9]\{3}/ contained
 "exe s:h . " gbitsec12 " . s:bold . s:bitssec
 "syn match gbitsec11 excludenl  /[0-9]\{3}/ contained nextgroup=gbitsec12
 "exe s:h . " gbitsec11 " . s:bold . s:kbitssec
@@ -2327,7 +2327,7 @@ exe s:h . " tbitsec2b " . s:bold . s:pbitssec
 "
 "
 "syn region tbitsec_reg start=/\(is\|rate\) [0-9]\{13} / end=/bit/ oneline keepend contains=tbitsec1,tbitsec2,tbitsec3,tbitsec4,tbitsec5
-"syn match tbitsec5 excludenl /[0-9]\{3}/ contained 
+"syn match tbitsec5 excludenl /[0-9]\{3}/ contained
 "exe s:h . " tbitsec5 " . s:bold . s:bitssec
 "syn match tbitsec4 excludenl /[0-9]\{3}/ contained nextgroup=tbitsec5
 "exe s:h . " tbitsec4 " . s:bold . s:kbitssec
@@ -2360,7 +2360,7 @@ exe s:h . " mbytes5b " . s:bold . s:mbitssec
 
 
 synt region gbytes_reg start=/ [0-9]\{7}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=gbytes2b,gbytes3b,gbytes4b
-synt match gbytes4b excludenl  /[0-9]\{3}/ contained 
+synt match gbytes4b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbytes4b " . s:bold . s:kbitssec
 synt match gbytes3b excludenl  /[0-9]\{3}/ contained nextgroup=gbytes4b
 exe s:h . " gbytes3b " . s:bold . s:mbitssec
@@ -2368,7 +2368,7 @@ synt match gbytes2b excludenl  /[0-9]\{1}/ contained nextgroup=gbytes3b
 exe s:h . " gbytes2b " . s:bold . s:gbitssec
 
 synt region gbytes_reg2 start=/ [0-9]\{8}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=gbytes5b,gbytes6b,gbytes7b
-synt match gbytes7b excludenl  /[0-9]\{3}/ contained 
+synt match gbytes7b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbytes7b " . s:bold . s:kbitssec
 synt match gbytes6b excludenl  /[0-9]\{3}/ contained nextgroup=gbytes7b
 exe s:h . " gbytes6b " . s:bold . s:mbitssec
@@ -2376,7 +2376,7 @@ synt match gbytes5b excludenl  /[0-9]\{2}/ contained nextgroup=gbytes6b
 exe s:h . " gbytes5b " . s:bold . s:gbitssec
 
 synt region gbytes_reg3 start=/ [0-9]\{9}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=gbytes8b,gbytes9b,gbytes10b
-synt match gbytes10b excludenl  /[0-9]\{3}/ contained 
+synt match gbytes10b excludenl  /[0-9]\{3}/ contained
 exe s:h . " gbytes10b " . s:bold . s:kbitssec
 synt match gbytes9b excludenl  /[0-9]\{3}/ contained nextgroup=gbytes10b
 exe s:h . " gbytes9b " . s:bold . s:mbitssec
@@ -2385,7 +2385,7 @@ exe s:h . " gbytes8b " . s:bold . s:gbitssec
 
 
 synt region tbytes_reg start=/ [0-9]\{10}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=tbytes2b,tbytes3b,tbytes4b,tbytes5b
-synt match tbytes5b excludenl /[0-9]\{3}/ contained 
+synt match tbytes5b excludenl /[0-9]\{3}/ contained
 exe s:h . " tbytes5b " . s:bold . s:kbitssec
 synt match tbytes4b excludenl /[0-9]\{3}/ contained nextgroup=tbytes5b
 exe s:h . " tbytes4b " . s:bold . s:mbitssec
@@ -2396,7 +2396,7 @@ exe s:h . " tbytes2b " . s:bold . s:tbitssec
 
 
 synt region tbytes_reg2 start=/ [0-9]\{11}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=tbytes6b,tbytes7b,tbytes8b,tbytes9b
-synt match tbytes9b excludenl /[0-9]\{3}/ contained 
+synt match tbytes9b excludenl /[0-9]\{3}/ contained
 exe s:h . " tbytes9b " . s:bold . s:kbitssec
 synt match tbytes8b excludenl /[0-9]\{3}/ contained nextgroup=tbytes9b
 exe s:h . " tbytes8b " . s:bold . s:mbitssec
@@ -2406,7 +2406,7 @@ synt match tbytes6b excludenl /[0-9]\{2}/ contained nextgroup=tbytes7b
 exe s:h . " tbytes6b " . s:bold . s:tbitssec
 
 synt region tbytes_reg3 start=/ [0-9]\{12}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=tbytes10b,tbytes11b,tbytes12b,tbytes13b,tbytes14b
-synt match tbytes13b excludenl /[0-9]\{3}/ contained 
+synt match tbytes13b excludenl /[0-9]\{3}/ contained
 exe s:h . " tbytes13b " . s:bold . s:kbitssec
 synt match tbytes12b excludenl /[0-9]\{3}/ contained nextgroup=tbytes13b
 exe s:h . " tbytes12b " . s:bold . s:mbitssec
@@ -2416,7 +2416,7 @@ synt match tbytes10b excludenl /[0-9]\{3}/ contained nextgroup=tbytes11b
 exe s:h . " tbytes10b " . s:bold . s:tbitssec
 
 synt region pbytes_reg start=/ [0-9]\{13}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=pbytes1b,pbytes2b,pbytes3b,pbytes4b,pbytes5b
-synt match pbytes5b excludenl /[0-9]\{3}/ contained 
+synt match pbytes5b excludenl /[0-9]\{3}/ contained
 exe s:h . " pbytes5b " . s:bold . s:kbitssec
 synt match pbytes4b excludenl /[0-9]\{3}/ contained nextgroup=pbytes5b
 exe s:h . " pbytes4b " . s:bold . s:mbitssec
@@ -2428,7 +2428,7 @@ synt match pbytes1b excludenl /[0-9]\{1}/ contained nextgroup=pbytes2b
 exe s:h . " pbytes1b " . s:bold . s:pbitssec
 
 synt region pbytes_reg2 start=/ [0-9]\{14}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=pbytes6b,pbytes7b,pbytes8b,pbytes9b,pbytes10b
-synt match pbytes10b excludenl /[0-9]\{3}/ contained 
+synt match pbytes10b excludenl /[0-9]\{3}/ contained
 exe s:h . " pbytes10b " . s:bold . s:kbitssec
 synt match pbytes9b excludenl /[0-9]\{3}/ contained nextgroup=pbytes10b
 exe s:h . " pbytes9b " . s:bold . s:mbitssec
@@ -2440,7 +2440,7 @@ synt match pbytes6b excludenl /[0-9]\{2}/ contained nextgroup=pbytes7b
 exe s:h . " pbytes6b " . s:bold . s:pbitssec
 
 synt region pbytes_reg3 start=/ [0-9]\{15}/ end=/,\| \|$/re=e-1,me=e-1 oneline keepend contains=pbytes11b,pbytes12b,pbytes13b,pbytes14b,pbytes15b
-synt match pbytes15b excludenl /[0-9]\{3}/ contained 
+synt match pbytes15b excludenl /[0-9]\{3}/ contained
 exe s:h . " pbytes15b " . s:bold . s:kbitssec
 synt match pbytes14b excludenl /[0-9]\{3}/ contained nextgroup=pbytes15b
 exe s:h . " pbytes14b " . s:bold . s:mbitssec
@@ -2458,95 +2458,41 @@ exe s:h . " pbytes11b " . s:bold . s:pbitssec
 "}}}
 
 " show interface error conditions {{{
-synt match int_errors / [1-9][0-9]* collision[s]\{0,1}/hs=s+1 
-synt match int_errors / [1-9][0-9]* runts/hs=s+1 
-synt match int_errors / [1-9][0-9]* giants/hs=s+1 
-synt match int_errors / [1-9][0-9]* throttles/hs=s+1 
-synt match int_errors / [1-9][0-9]* input errors/hs=s+1 
-synt match int_errors / [1-9][0-9]* CRC/hs=s+1 
-synt match int_errors / [1-9][0-9]* frame/hs=s+1 
-synt match int_errors / [1-9][0-9]* overrun/hs=s+1 
-synt match int_errors / [1-9][0-9]* ignored/hs=s+1 
-synt match int_errors / [1-9][0-9]* watchdog/hs=s+1 
-synt match int_errors / [1-9][0-9]* input packets with dribble condition detected/hs=s+1 
+synt match int_errors / [1-9][0-9]* collision[s]\{0,1}/hs=s+1
+synt match int_errors / [1-9][0-9]* runts/hs=s+1
+synt match int_errors / [1-9][0-9]* giants/hs=s+1
+synt match int_errors / [1-9][0-9]* throttles/hs=s+1
+synt match int_errors / [1-9][0-9]* input errors/hs=s+1
+synt match int_errors / [1-9][0-9]* CRC/hs=s+1
+synt match int_errors / [1-9][0-9]* frame/hs=s+1
+synt match int_errors / [1-9][0-9]* overrun/hs=s+1
+synt match int_errors / [1-9][0-9]* ignored/hs=s+1
+synt match int_errors / [1-9][0-9]* watchdog/hs=s+1
+synt match int_errors / [1-9][0-9]* input packets with dribble condition detected/hs=s+1
 synt match int_errors / [1-9][0-9]* input discard/hs=s+1
 synt match int_errors / [1-9][0-9]* output discard/hs=s+1
 synt match int_errors / [1-9][0-9]* output error[s]\{0,1}/hs=s+1
-synt match int_errors / [1-9][0-9]* unknown protocol drops/hs=s+1 
-synt match int_errors / [1-9][0-9]* babble[s]\{0,1}/hs=s+1 
-synt match int_errors / [1-9][0-9]* late collision/hs=s+1 
-synt match int_errors / [1-9][0-9]* deferred/hs=s+1 
-synt match int_errors / [1-9][0-9]* lost carrier/hs=s+1 
-synt match int_errors / [1-9][0-9]* no carrier/hs=s+1 
-synt match int_errors / [1-9][0-9]* no buffer/hs=s+1 
-synt match int_errors / [1-9][0-9]* input errors*/hs=s+1 
-synt match int_errors / [1-9][0-9]* short frame/hs=s+1 
-synt match int_errors / [1-9][0-9]* bad etype drop/hs=s+1 
-synt match int_errors / [1-9][0-9]* bad proto drop/hs=s+1 
-synt match int_errors / [1-9][0-9]* if down drop/hs=s+1 
-synt match int_errors / [1-9][0-9]* input with dribble/hs=s+1 
-synt match int_errors / [1-9][0-9]* output buffer failures/hs=s+1 
-synt match int_errors / [1-9][0-9]* underrun/hs=s+1 
-synt match int_errors / [1-9][0-9]* ignored/hs=s+1 
-synt match int_errors / [1-9][0-9]* storm suppression/hs=s+1 
-synt match int_errors / [1-9][0-9]* abort/hs=s+1 
-synt match int_errors / [eE]rr[Dd]isable[d ]/hs=s+1 
-synt match int_errors /Pkts discarded on ingress *: [1-9][0-9]*/hs=s+1 
+synt match int_errors / [1-9][0-9]* unknown protocol drops/hs=s+1
+synt match int_errors / [1-9][0-9]* babble[s]\{0,1}/hs=s+1
+synt match int_errors / [1-9][0-9]* late collision/hs=s+1
+synt match int_errors / [1-9][0-9]* deferred/hs=s+1
+synt match int_errors / [1-9][0-9]* lost carrier/hs=s+1
+synt match int_errors / [1-9][0-9]* no carrier/hs=s+1
+synt match int_errors / [1-9][0-9]* no buffer/hs=s+1
+synt match int_errors / [1-9][0-9]* input errors*/hs=s+1
+synt match int_errors / [1-9][0-9]* short frame/hs=s+1
+synt match int_errors / [1-9][0-9]* bad etype drop/hs=s+1
+synt match int_errors / [1-9][0-9]* bad proto drop/hs=s+1
+synt match int_errors / [1-9][0-9]* if down drop/hs=s+1
+synt match int_errors / [1-9][0-9]* input with dribble/hs=s+1
+synt match int_errors / [1-9][0-9]* output buffer failures/hs=s+1
+synt match int_errors / [1-9][0-9]* underrun/hs=s+1
+synt match int_errors / [1-9][0-9]* ignored/hs=s+1
+synt match int_errors / [1-9][0-9]* storm suppression/hs=s+1
+synt match int_errors / [1-9][0-9]* abort/hs=s+1
+synt match int_errors / [eE]rr[Dd]isable[d ]/hs=s+1
+synt match int_errors /Pkts discarded on ingress *: [1-9][0-9]*/hs=s+1
 exe s:h . "int_errors" . s:error
-
-"}}}
-
-" hostnames {{{
-
-synt match functional /vns/ contained nextgroup=dcntr,site
-synt match functional /n1k/ contained nextgroup=dcntr,site
-synt match functional /mls/ contained nextgroup=dcntr,site
-synt match functional /cis/ contained nextgroup=dcntr,site
-synt match functional /stk/ contained nextgroup=dcntr,site
-synt match functional /rtr/ contained nextgroup=dcntr,site
-synt match functional /wgs/ contained nextgroup=dcntr,site
-exe s:h . "functional" . s:keyword1
-
-synt match dcntr /elr/ contained nextgroup=IDA
-synt match dcntr /ctc/ contained nextgroup=IDA
-synt match dcntr /ply/ contained nextgroup=IDA
-synt match dcntr /ELR/ contained nextgroup=IDA
-synt match dcntr /CTC/ contained nextgroup=IDA
-synt match dcntr /PLY/ contained nextgroup=IDA
-exe s:h . "dcntr" . s:keyword1
-
-synt match site /\v[a-zA-Z]{2}[0-9]{3}/ contained nextgroup=role,designator
-exe s:h . 'site' . s:keyword2
-
-synt match IDA /[0-9]\+/ contained nextgroup=role
-exe s:h . "IDA" . s:fggreen
-
-synt match role /pri/ contained nextgroup=numbr
-synt match role /ext/ contained nextgroup=numbr
-synt match role /isp/ contained nextgroup=numbr
-synt match role /prd/ contained nextgroup=numbr
-synt match role /vsm/ contained nextgroup=numbr
-synt match role /dis/ contained nextgroup=numbr
-synt match role /csf/ contained nextgroup=numbr
-synt match role /ebr/ contained nextgroup=numbr
-synt match role /dbr/ contained nextgroup=numbr
-synt match role /sto/ contained nextgroup=numbr
-synt match role /aip/ contained nextgroup=numbr
-synt match role /sip/ contained nextgroup=numbr
-synt match role /ccm/ contained nextgroup=numbr
-synt match role /lon/ contained nextgroup=numbr
-synt match role /oob/ contained nextgroup=numbr
-synt match role /leaf/ contained nextgroup=numbr
-synt match role /spine/ contained nextgroup=numbr
-exe s:h . "role" . s:keyword1
-
-synt match designator /\va[0-9]{2}a[0-9]{2}/ contained
-exe s:h . 'designator' . s:keyword3
-
-synt match numbr /[0-9]\+/ contained
-exe s:h . "numbr" . s:fgred
-
-synt region UHC_Hostname start="mls\|cis\|rtr\|stk\|wgs\|n1k\|vns" end=" " excludenl transparent contains=functional
 
 "}}}
 
@@ -2555,7 +2501,7 @@ synt region UHC_Hostname start="mls\|cis\|rtr\|stk\|wgs\|n1k\|vns" end=" " exclu
 syntax match timestamp excludenl / \d\d:\d\d:\d\d[ .]/ skipwhite contained nextgroup=subseconds
 exe s:h . "timestamp" . s:parameter2
 
-syntax match subseconds excludenl /\.\d\+/ contained skipwhite 
+syntax match subseconds excludenl /\.\d\+/ contained skipwhite
 exe s:h . "subseconds" . s:italic . s:fggray
 
 synt match month / [A-Z][a-z][a-z]/ contained skipwhite nextgroup=day
@@ -2584,7 +2530,7 @@ exe s:h . "ciscoerror" . s:emphasis
 "syntax match devicetimestamp /\d\d:\d\d:\d\d/ contained keepend
 "exe s:h . "match" . s:fgbluegreen
 
-"syntax match devicedaystamp / \u\w\+\s\+\d\+\s / nextgroup=devicetimestamp skipwhite keepend 
+"syntax match devicedaystamp / \u\w\+\s\+\d\+\s / nextgroup=devicetimestamp skipwhite keepend
 "exe s:h . "match" . s:fgorange
 
 "}}}
@@ -2598,15 +2544,15 @@ synt match config_prompt_hostname excludenl  /^[^ ]\{-1,63}(/ contained nextgrou
 exe s:h . "config_prompt_hostname" . s:fgwhite . s:bgbluegreen
 "hi config_prompt_hostname ctermfg=white ctermbg=darkred guibg=firebrick guifg=white
 
-synt match config_word excludenl /config/ contained 
+synt match config_word excludenl /config/ contained
 exe s:h . "config_word" . s:bold . s:fgblack . s:bgorange
 "hi config_word ctermbg=red ctermfg=white guibg=red guifg=white
 
-synt match config_mode excludenl /-[^ )]\{1,32}/ contained 
+synt match config_mode excludenl /-[^ )]\{1,32}/ contained
 exe s:h . "config_mode" . s:bold . s:fgblack . s:bgred
 "hi config_mode ctermbg=darkyellow ctermfg=white guibg=darkorange guifg=white
 
-synt match config_prompt_end excludenl /)#/me=e-1 contained 
+synt match config_prompt_end excludenl /)#/me=e-1 contained
 exe s:h . "config_prompt_end" . s:fgwhite . s:bgbluegreen
 "hi config_prompt_end ctermfg=white ctermbg=darkred guibg=firebrick guifg=white
 
@@ -2619,4 +2565,3 @@ synt region config_prompt_reg keepend start=/^[a-zA-Z0-9]\{-1,63}([a-zA-Z\-]\+)/
 
 "}}}
 let b:current_syntax = "cisco"
-
