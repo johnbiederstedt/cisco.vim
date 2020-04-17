@@ -813,6 +813,22 @@ exe s:h . "no_shutdown" . s:bold . s:fggreen
 synt match Console_Error /^%.*/
 exe s:h . "Console_Error" . s:emphasis
 
+"}}}
+" object-group{{{
+synt match Object_Group_KW /object-group/ nextgroup=Object_Groups
+exe s:h . "Object_Group_KW" . s:keyword1
+
+synt match Object_Groups /knob/ contained nextgroup=Object_Group_Knobs
+synt match Object_Groups /network/ contained nextgroup=parameter1
+synt match Object_Groups /security/ contained nextgroup=parameter1
+synt match Object_Groups /service/ contained nextgroup=parameter1
+synt match Object_Groups /v6-network/ contained nextgroup=parameter1
+synt match Object_Groups /v6-service/ contained nextgroup=parameter1
+exe s:h . "Object_Groups" . s:keyword2
+
+synt match Object_Group_Knobs /check-nested-entry-dup/ contained nextgroup=parameter1
+synt match Object_Group_Knobs /check-normal-entry-dup/ contained nextgroup=parameter1
+exe s:h . "Object_Group_Knobs" . s:keyword3
 
 "}}}
 " Key chain {{{
