@@ -830,6 +830,8 @@ synt match Object_Group_Knobs /check-nested-entry-dup/ contained nextgroup=param
 synt match Object_Group_Knobs /check-normal-entry-dup/ contained nextgroup=parameter1
 exe s:h . "Object_Group_Knobs" . s:keyword3
 
+synt region Object_Group_region start=/^object-group/ end=/$/ excludenl keepend contains=Object_Group_KW,Object_Groups,Object_Group_Knobs,parameter1
+
 "}}}
 " Key chain {{{
 synt match key_KW /^key/ skipwhite nextgroup=key_chain_KW
